@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://rhwtme74ymyd"]
+
+[ext_resource type="Texture2D" uid="uid://vfykfjd5csb0" path="res://Assets/UI/placeholder_bg.png" id="1_bwhua"]
+
+[node name="Node2D" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="PlaceholderBg" type="Sprite2D" parent="."]
+texture = ExtResource("1_bwhua")
+centered = false
