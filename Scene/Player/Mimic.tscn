@@ -265,7 +265,6 @@ emission_sphere_radius = 10.0
 spread = 20.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-y_sort_enabled = true
 position = Vector2(0, -5)
 texture = ExtResource("2_4tsif")
 hframes = 5

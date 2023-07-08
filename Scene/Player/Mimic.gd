@@ -27,7 +27,7 @@ func _ready():
 	qte["wantedTime"] = randf_range(0.1,0.9)
 
 func _process(delta):
-	modulate = Color.CRIMSON if is_hidden else Color.WHITE
+	$Sprite2D.modulate = Color.DIM_GRAY if is_hidden else Color.WHITE
 	
 	process_qte()
 	process_hunger(delta)
@@ -72,8 +72,9 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func on_hit():
-	hungerMeter = clamp(hungerMeter-0.2,0,1)
+func on_hit(dmg:float=0.2):
+	hungerMeter = clamp(hungerMeter-dmg,0,1)
+	#animationState.travel("Hit")
 	pass
 
 
