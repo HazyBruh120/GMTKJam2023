@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://duaulf744u833"]
+[gd_scene load_steps=7 format=3 uid="uid://duaulf744u833"]
 
 [ext_resource type="Script" path="res://Scene/Hero.gd" id="1_qh1js"]
 
@@ -21,6 +21,9 @@ image = SubResource("Image_mje37")
 [sub_resource type="CircleShape2D" id="CircleShape2D_tm0an"]
 radius = 90.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_aloaj"]
+radius = 13.0
+
 [node name="Hero" type="CharacterBody2D"]
 position = Vector2(0, -15)
 script = ExtResource("1_qh1js")
@@ -42,3 +45,13 @@ position = Vector2(0, 15)
 shape = SubResource("CircleShape2D_tm0an")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+position = Vector2(0, 14)
+shape = SubResource("CircleShape2D_aloaj")
+
+[connection signal="area_entered" from="InteractArea" to="." method="_on_interact_area_area_entered"]
