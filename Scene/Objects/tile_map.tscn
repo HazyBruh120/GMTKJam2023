@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://mkcft8bq1n8o"]
+[gd_scene load_steps=10 format=3 uid="uid://ddk1x0taxnteo"]
 
-[ext_resource type="Texture2D" uid="uid://canxwveklk35t" path="res://Assets/Art/Tiles-SandstoneDungeons.png" id="1_uobjo"]
-[ext_resource type="Texture2D" uid="uid://c8gtukp7aafpw" path="res://Assets/Art/Tiles-Door-packs.png" id="2_bvkq6"]
-[ext_resource type="Texture2D" uid="uid://cgj12ktpvkiq6" path="res://Assets/Art/Tiles-Items-pack.png" id="3_rls7e"]
-[ext_resource type="Texture2D" uid="uid://bjp3llsok6dy6" path="res://Assets/Art/Tiles-Props-pack.png" id="4_dfxsa"]
+[ext_resource type="Texture2D" uid="uid://sncut5ra0cyo" path="res://Assets/Art/Tiles-SandstoneDungeons.png" id="1_uobjo"]
+[ext_resource type="Texture2D" uid="uid://c8jbo2peqn1am" path="res://Assets/Art/Tiles-Door-packs.png" id="2_bvkq6"]
+[ext_resource type="Texture2D" uid="uid://cvhuqg0nnpyob" path="res://Assets/Art/Tiles-Items-pack.png" id="3_rls7e"]
+[ext_resource type="Texture2D" uid="uid://b1ndqn7xu006j" path="res://Assets/Art/Tiles-Props-pack.png" id="4_dfxsa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nvc35"]
 texture = ExtResource("1_uobjo")

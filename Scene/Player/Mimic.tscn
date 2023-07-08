@@ -268,12 +268,8 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Move/blend_position = Vector2(0, 0)
 
-[node name="StealthTimer" type="Timer" parent="."]
-wait_time = 0.5
-
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 z_index = -1
-emitting = false
 lifetime = 0.15
 emission_shape = 1
 emission_sphere_radius = 10.0

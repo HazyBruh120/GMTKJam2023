@@ -1,6 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://duaulf744u833"]
+[gd_scene load_steps=12 format=3 uid="uid://duaulf744u833"]
 
 [ext_resource type="Script" path="res://Scene/Hero.gd" id="1_qh1js"]
+[ext_resource type="Texture2D" uid="uid://cyxt8qxwor2sp" path="res://Assets/Art/Exclamation-Mark.png" id="2_dlxni"]
+[ext_resource type="Texture2D" uid="uid://d2fmv4s8ehqqr" path="res://Assets/Art/Star.png" id="2_hubvo"]
+[ext_resource type="Texture2D" uid="uid://b5khgx2pg4luj" path="res://Assets/Art/empty.png" id="3_w26fo"]
+[ext_resource type="Texture2D" uid="uid://47jkt055s738" path="res://Assets/Art/Question-Mark.png" id="4_th7sg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mh8nr"]
 radius = 5.0
@@ -24,9 +28,45 @@ radius = 90.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_aloaj"]
 radius = 13.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_vsosa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dlxni")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_w26fo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hubvo")
+}],
+"loop": true,
+"name": &"loot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_th7sg")
+}],
+"loop": true,
+"name": &"missing",
+"speed": 5.0
+}]
+
 [node name="Hero" type="CharacterBody2D"]
 y_sort_enabled = true
 position = Vector2(2.08165e-12, 2.08165e-12)
+motion_mode = 1
 script = ExtResource("1_qh1js")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -56,4 +96,13 @@ collision_mask = 2
 position = Vector2(-2.08165e-12, 0)
 shape = SubResource("CircleShape2D_aloaj")
 
+[node name="EmoteSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -35)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_vsosa")
+
+[node name="QuestionTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="InteractArea" to="." method="_on_interact_area_area_entered"]
+[connection signal="timeout" from="QuestionTimer" to="." method="_on_question_timer_timeout"]
