@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://cm6exqoayfcvn"
+path="res://.godot/imported/training_dummy.png-1d7d893431c2d60380798d75f027efa0.image"
+
+[deps]
+
+source_file="res://Assets/Art/training_dummy.png"
+dest_files=["res://.godot/imported/training_dummy.png-1d7d893431c2d60380798d75f027efa0.image"]
+
+[params]
+
