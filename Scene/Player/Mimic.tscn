@@ -1,10 +1,13 @@
-[gd_scene load_steps=29 format=3 uid="uid://yih435t43oki"]
+[gd_scene load_steps=30 format=3 uid="uid://yih435t43oki"]
 
 [ext_resource type="Script" path="res://Scene/Player/Mimic.gd" id="1_gqpi8"]
 [ext_resource type="Texture2D" uid="uid://cljb4x3brd1f8" path="res://Assets/Art/chest_mimic.png" id="2_4tsif"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg6ip"]
 size = Vector2(15, 6.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_asr74"]
+radius = 12.173
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_so68a"]
 radius = 51.2498
@@ -225,18 +228,26 @@ states/Start/position = Vector2(202, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_33cmv"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_7qga8"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_ywsei")]
 graph_offset = Vector2(-456, -19)
 
-[node name="Mimic" type="CharacterBody2D"]
+[node name="Mimic" type="CharacterBody2D" groups=["mimic"]]
+y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_gqpi8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
 texture = ExtResource("2_4tsif")
 hframes = 5
 vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8.5)
+visible = false
+position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_tg6ip")
+
+[node name="EatArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EatArea"]
+shape = SubResource("CircleShape2D_asr74")
 
 [node name="LureArea" type="Area2D" parent="."]
 visible = false
@@ -256,6 +267,13 @@ tree_root = SubResource("AnimationNodeStateMachine_xhgnf")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Move/blend_position = Vector2(0, 0)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+lifetime = 0.15
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 20.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)
