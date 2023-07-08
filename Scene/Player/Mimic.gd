@@ -52,7 +52,7 @@ func _process(delta):
 
 func _physics_process(delta):
 	var input_vector = Input.get_vector("game_left", "game_right","game_up", "game_down")
-	if Input.is_action_pressed("boost") :
+	if Input.is_action_pressed("boost") and input_vector != Vector2.ZERO:
 		if boostMeter > 0.0 :
 			input_vector *= 1.5
 			boostMeter -= delta
