@@ -256,3 +256,8 @@ tree_root = SubResource("AnimationNodeStateMachine_xhgnf")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Move/blend_position = Vector2(0, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+process_callback = 0
+position_smoothing_enabled = true
