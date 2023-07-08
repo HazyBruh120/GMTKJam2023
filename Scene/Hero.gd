@@ -12,8 +12,11 @@ func _init():
 	pass
 
 func _physics_process(delta):
+	if not is_instance_valid(target_loot):
+		target_loot = null
 
 	if target_loot != null:
+		print("not null")
 		if target_loot.is_in_group("mimic"):
 			var space_state = get_world_2d().direct_space_state
 			var query = PhysicsRayQueryParameters2D.create(global_position, target_loot.global_position, collision_mask, [self])
@@ -21,6 +24,7 @@ func _physics_process(delta):
 
 			if result and result["collider"].is_in_group("mimic"):
 				nav_agent.target_position = target_loot.position
+				print("chasing")
 
 		if nav_agent.distance_to_target() < 3:
 			target_loot = null
@@ -28,6 +32,7 @@ func _physics_process(delta):
 		calc_velocity()
 
 	elif scanner.has_overlapping_areas():
+		print("overlapping")
 		var nearby_loot = scanner.get_overlapping_areas()
 		var space_state = get_world_2d().direct_space_state
 
@@ -37,8 +42,9 @@ func _physics_process(delta):
 			var query = PhysicsRayQueryParameters2D.create(global_position, loot.global_position, collision_mask, [self])
 			var result = space_state.intersect_ray(query)
 
-			if not result or (result and result["collider"].is_in_group("loot")):
+			if not result or (result and result["collider"].is_in_group("mimic")):
 				if target_loot == null or position.distance_to(loot.position) < position.distance_to(target_loot.position):
+
 					target_loot = loot
 
 		if target_loot != null:
@@ -53,13 +59,11 @@ func _physics_process(delta):
 				nav_agent.target_position = target_random
 
 				if nav_agent.is_target_reachable():
-					print("reachable")
 					has_move_target = true
 					break
 
 		else:
 			# print(nav_agent.distance_to_target())
-			print("moving")
 			calc_velocity()
 
 

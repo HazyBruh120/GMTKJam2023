@@ -14,7 +14,7 @@ func _ready():
 
 func _process(delta):
 	if animationState.get_current_node() == "Idle" :
-		$LureArea.monitorable = Input.is_action_pressed("lure")
+	#	$LureArea.monitorable = Input.is_action_pressed("lure")
 		$LureArea.visible = Input.is_action_pressed("lure")
 
 	var input_vector = velocity.normalized()
