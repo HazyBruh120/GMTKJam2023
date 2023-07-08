@@ -6,8 +6,11 @@ const SPEED = 100.0
 @onready var nav_agent = $NavigationAgent2D
 @onready var emote = $EmoteSprite
 
+@export var health: int = 5
+
 var target_loot: Area2D = null
 var has_move_target = false
+var target_still_hidden = true
 
 func _init():
 	pass
@@ -19,7 +22,10 @@ func _physics_process(delta):
 			emote.play("default")
 
 	if target_loot != null:
-		if target_loot.is_in_group("mimic"):
+		if target_loot.is_in_group("mimic") and target_still_hidden and not target_loot.get_parent().is_hidden:
+			target_still_hidden = false
+
+		if target_loot.is_in_group("mimic") and not target_still_hidden:
 			emote.play("attack")
 
 			var space_state = get_world_2d().direct_space_state
@@ -28,11 +34,10 @@ func _physics_process(delta):
 			var query = PhysicsRayQueryParameters2D.create(global_position, target_loot.global_position + diff, collision_mask, [self])
 			var result = space_state.intersect_ray(query)
 
-			print(result)
-
 			if result and result["collider"].is_in_group("mimic"):
 				nav_agent.target_position = target_loot.global_position
-				print("chasing")
+			else:
+				emote.play("missing")
 
 		if nav_agent.distance_to_target() < 3:
 			target_loot = null
@@ -43,7 +48,6 @@ func _physics_process(delta):
 		calc_velocity()
 
 	elif scanner.has_overlapping_areas():
-		print("overlapping")
 		var nearby_loot = scanner.get_overlapping_areas()
 		var space_state = get_world_2d().direct_space_state
 
@@ -64,12 +68,34 @@ func _physics_process(delta):
 			nav_agent.target_position = target_loot.global_position
 			emote.play("loot")
 
-	print(target_loot)
 	if target_loot == null:
 		if not has_move_target or (has_move_target and (nav_agent.distance_to_target() < 10 or nav_agent.is_target_reached())):
 
 			while(true):
+
 				var target_random = Vector2(randi_range(-300, 300), randi_range(-300, 300))
+				if emote.animation == "missing":
+					var dir = velocity.normalized()
+					var scan_vec = dir * 30
+					var vec1 = scan_vec.rotated(PI/4)
+					var vec2 = scan_vec.rotated(-PI/4)
+					var vec3 = position
+
+					var r1 = randf()
+					var r2 = randf()
+
+					if (r1 + r2 > 1):
+						r1 = 1 - r1
+						r2 = 1 - r2
+
+					var a = 1 - r1 - r2;
+					var b = r1;
+					var c = r2;
+
+					target_random = a*vec1 + b*vec2 + c*vec3
+					target_random += global_transform.origin
+					print(target_random)
+
 				nav_agent.target_position = target_random
 
 				if nav_agent.is_target_reachable():
@@ -82,20 +108,18 @@ func _physics_process(delta):
 
 
 	move_and_slide()
-	queue_redraw()
 
-
-func _draw():
-	print("draw")
-	if target_loot != null:
-		print("Drawing")
-		draw_line(Vector2.ZERO, target_loot.global_position - global_transform.origin, Color.GREEN, 10)
 
 func calc_velocity():
 	var next_pos: Vector2 = nav_agent.get_next_path_position()
 
 	velocity = (next_pos - position).normalized() * SPEED
 
+
+func bit():
+	health -= 1
+	if health <= 0:
+		queue_free()
 
 
 func _on_interact_area_area_entered(area):
@@ -110,3 +134,4 @@ func _on_interact_area_area_entered(area):
 func _on_question_timer_timeout():
 	if emote.animation == "missing":
 		emote.play("default")
+	target_still_hidden = true
