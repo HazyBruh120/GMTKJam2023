@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 150.0
+const SPEED = 100.0
 
 @onready var scanner = $DetectionArea
 @onready var nav_agent = $NavigationAgent2D
@@ -16,18 +16,23 @@ func _physics_process(delta):
 		target_loot = null
 
 	if target_loot != null:
-		print("not null")
 		if target_loot.is_in_group("mimic"):
+
 			var space_state = get_world_2d().direct_space_state
-			var query = PhysicsRayQueryParameters2D.create(global_position, target_loot.global_position, collision_mask, [self])
+
+			var diff = target_loot.global_position - global_position
+			var query = PhysicsRayQueryParameters2D.create(global_position, target_loot.global_position + diff, collision_mask, [self])
 			var result = space_state.intersect_ray(query)
 
+			print(result)
+
 			if result and result["collider"].is_in_group("mimic"):
-				nav_agent.target_position = target_loot.position
+				nav_agent.target_position = target_loot.global_position
 				print("chasing")
 
 		if nav_agent.distance_to_target() < 3:
 			target_loot = null
+			pass
 
 		calc_velocity()
 
@@ -51,6 +56,7 @@ func _physics_process(delta):
 			has_move_target = false
 			nav_agent.target_position = target_loot.global_position
 
+	print(target_loot)
 	if target_loot == null:
 		if not has_move_target or (has_move_target and (nav_agent.distance_to_target() < 10 or nav_agent.is_target_reached())):
 
@@ -68,6 +74,14 @@ func _physics_process(delta):
 
 
 	move_and_slide()
+	queue_redraw()
+
+
+func _draw():
+	print("draw")
+	if target_loot != null:
+		print("Drawing")
+		draw_line(Vector2.ZERO, target_loot.global_position - global_transform.origin, Color.GREEN, 10)
 
 func calc_velocity():
 	var next_pos: Vector2 = nav_agent.get_next_path_position()

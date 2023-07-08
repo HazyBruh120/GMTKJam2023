@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Scene/Hero.gd" id="1_qh1js"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mh8nr"]
-radius = 7.0
-height = 14.0
+radius = 5.0
+height = 10.0
 
 [sub_resource type="Image" id="Image_1js4e"]
 data = {
@@ -26,14 +26,14 @@ radius = 13.0
 
 [node name="Hero" type="CharacterBody2D"]
 y_sort_enabled = true
-position = Vector2(0, -15)
+position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_qh1js")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 13)
 shape = SubResource("CapsuleShape2D_mh8nr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -13)
 scale = Vector2(0.612016, 0.456042)
 texture = SubResource("ImageTexture_5coo3")
 
@@ -42,19 +42,18 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2(0, 15)
 shape = SubResource("CircleShape2D_tm0an")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 5.0
-path_postprocessing = 1
+debug_enabled = true
 
 [node name="InteractArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
-position = Vector2(0, 14)
+position = Vector2(-2.08165e-12, 0)
 shape = SubResource("CircleShape2D_aloaj")
 
 [connection signal="area_entered" from="InteractArea" to="." method="_on_interact_area_area_entered"]
