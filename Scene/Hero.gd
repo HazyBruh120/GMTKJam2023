@@ -1,9 +1,6 @@
 extends CharacterBody2D
 
-
 const SPEED = 300.0
-
-
 
 @onready var scanner = $DetectionArea
 @onready var nav_agent = $NavigationAgent2D
@@ -21,7 +18,14 @@ func _physics_process(delta):
 				target_loot = loot
 
 		nav_agent.target_position = target_loot.global_position
-		var next_pos = nav_agent.get_next_path_position()
+		var next_pos: Vector2 = nav_agent.get_next_path_position()
+
+		velocity = (next_pos - position).normalized() * SPEED
+
+	else:
+		velocity.move_toward(Vector2.ZERO, SPEED)
+
+	move_and_slide()
 
 
 
