@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 150.0
+@export var qte_range:float = 0.2
 
 @onready var animationTree = $AnimationTree
 @onready var animationState = animationTree["parameters/playback"]
@@ -16,23 +17,16 @@ var boostMeter:float = 1
 var hungerMeter:float = 1
 var is_hidden:bool = false
 var qte = {
-	"timer": Timer.new(),
-	"delayTimer": Timer.new(),
-	"window": 1.0,
-	"delay": 2.0,
-	"range": 0.2,
 	"wantedTime": randf_range(0.1,0.9), ## Randomized every qte
 	"success": false ## for use in the process
-	} : set = _set_qte
+	}
 
 func _ready():
 	animationTree.active = true
-	qte["timer"].wait_time = qte["window"]
-	qte["timer"].wait_time = qte["delay"]
-	add_child(qte["timer"])
-	add_child(qte["delayTimer"])
+	qte["wantedTime"] = randf_range(0.1,0.9)
 
 func _process(delta):
+	modulate = Color.CRIMSON if is_hidden else Color.WHITE
 	
 	process_qte()
 	
@@ -75,42 +69,26 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func _set_qte(new_qte):
-	qte["timer"].wait_time = new_qte["window"] + new_qte["delay"]
-	qte["window"] = new_qte["window"]
-	qte["delay"] = new_qte["delay"]
-
-
-func set_quickTime_event(window:float,delay:float):
-	qte["timer"].wait_time = window + delay
-	qte["window"] = window
-	qte["delay"] = delay
-	
 func process_qte():
-	if (qte["wantedTime"] < qte["timer"].time_left-qte["range"] or qte["wantedTime"] > qte["timer"].time_left+qte["range"]) and \
-		Input.is_action_pressed("qte") and \
-		qte["timer"].time_left <= qte["window"]:
+	if (qte["wantedTime"] < qteTimer.time_left-qte_range or qte["wantedTime"] > qteTimer.time_left+qte_range) and \
+		Input.is_action_just_pressed("qte") and \
+		qteTimer.time_left <= qteTimer.wait_time:
 		is_hidden = false
 		qte["success"] = false
-	elif (qte["wantedTime"] > qte["timer"].time_left-qte["range"] and qte["wantedTime"] < qte["timer"].time_left+qte["range"]) and \
-		Input.is_action_pressed("qte") and \
-		qte["timer"].time_left <= qte["window"]:
+	elif (qte["wantedTime"] > qteTimer.time_left-qte_range and qte["wantedTime"] < qteTimer.time_left+qte_range) and \
+		Input.is_action_just_pressed("qte") and \
+		qteTimer.time_left <= qteTimer.wait_time:
 		qte["success"] = true
 	
-	if is_hidden and qte["timer"].is_stopped() :
-		qteSlider.visible = true
-		valSlider.visible = true
-		qte["timer"].start()
+	if is_hidden and delayTimer.is_stopped() and qteTimer.is_stopped():
+		delayTimer.start()
 	elif !is_hidden :
 		qteSlider.visible = false
 		valSlider.visible = false
-		qte["timer"].stop()
-	elif qte["timer"].time_left <= 0.1 :
-		qte["wantedTime"] = randf_range(0.1,qte["window"]-0.1)
-		valSlider.value = qte["wantedTime"]*100
-		is_hidden = qte["success"]
+		qteTimer.stop()
+		delayTimer.stop()
 	
-	qteSlider.value = qte["timer"].time_left*100
+	qteSlider.value = qteTimer.time_left/qteTimer.wait_time*100
 
 
 func _on_stealth_timer_timeout():
@@ -118,8 +96,15 @@ func _on_stealth_timer_timeout():
 
 
 func _on_delay_timer_timeout():
-	qte["success"] = false
-
+	qteSlider.visible = true
+	valSlider.visible = true
+	qte["wantedTime"] = randf_range(0.1,qteTimer.wait_time-0.25)
+	valSlider.value = qte["wantedTime"]*100
+	qteTimer.start()
 
 func _on_qte_timer_timeout():
-	pass # Replace with function body.
+	qteSlider.visible = false
+	valSlider.visible = false
+	is_hidden = qte["success"]
+	delayTimer.start()
+	qte["success"] = false

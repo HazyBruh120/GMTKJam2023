@@ -303,6 +303,7 @@ visible = false
 one_shot = true
 
 [node name="qteTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="delayTimer" type="Timer" parent="."]
 wait_time = 2.0
