@@ -20,7 +20,6 @@ func _ready():
 	add_child(quickTimer)
 
 func _process(delta):
-
 	var input_vector = velocity.normalized()
 
 	modulate = Color.CRIMSON if is_hidden else  Color.WHITE
@@ -30,7 +29,7 @@ func _process(delta):
 	print(quickTimer.time_left)
 	if wantedTime < quickTimer.time_left-range and wantedTime > quickTimer.time_left+range :
 		is_hidden = false
-	if is_hidden :
+	if is_hidden and quickTimer.is_stopped() :
 		quickTimer.start()
 	else:
 		quickTimer.stop()
