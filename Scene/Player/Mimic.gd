@@ -6,6 +6,7 @@ const SPEED = 150.0
 @onready var animationTree = $AnimationTree
 @onready var animationState = animationTree["parameters/playback"]
 @onready var particles = $CPUParticles2D
+@onready var timer:Timer = $StealthTimer
 
 var boostMeter:float = 1
 
@@ -14,6 +15,8 @@ func _ready():
 
 func _process(delta):
 	if animationState.get_current_node() == "Idle" :
+	#	Stealth mechanic for 
+	
 	#	$LureArea.monitorable = Input.is_action_pressed("lure")
 		$LureArea.visible = Input.is_action_pressed("lure")
 
@@ -44,5 +47,5 @@ func _physics_process(delta):
 		velocity = input_vector * SPEED
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
-
+	
 	move_and_slide()
