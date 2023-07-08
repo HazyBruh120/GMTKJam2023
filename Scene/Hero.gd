@@ -4,6 +4,7 @@ const SPEED = 100.0
 
 @onready var scanner = $DetectionArea
 @onready var nav_agent = $NavigationAgent2D
+@onready var emote = $EmoteSprite
 
 var target_loot: Area2D = null
 var has_move_target = false
@@ -14,9 +15,12 @@ func _init():
 func _physics_process(delta):
 	if not is_instance_valid(target_loot):
 		target_loot = null
+		if emote.animation != "missing":
+			emote.play("default")
 
 	if target_loot != null:
 		if target_loot.is_in_group("mimic"):
+			emote.play("attack")
 
 			var space_state = get_world_2d().direct_space_state
 
@@ -32,6 +36,8 @@ func _physics_process(delta):
 
 		if nav_agent.distance_to_target() < 3:
 			target_loot = null
+			emote.play("missing")
+			$QuestionTimer.start()
 			pass
 
 		calc_velocity()
@@ -52,9 +58,11 @@ func _physics_process(delta):
 
 					target_loot = loot
 
+
 		if target_loot != null:
 			has_move_target = false
 			nav_agent.target_position = target_loot.global_position
+			emote.play("loot")
 
 	print(target_loot)
 	if target_loot == null:
@@ -95,4 +103,10 @@ func _on_interact_area_area_entered(area):
 	if area_parent.is_in_group("loot"):
 		area_parent.queue_free()
 		target_loot = null
+		emote.play("default")
 
+
+
+func _on_question_timer_timeout():
+	if emote.animation == "missing":
+		emote.play("default")
