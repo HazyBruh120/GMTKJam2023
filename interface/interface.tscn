@@ -1,8 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1qkwvbm0buj8"]
+[gd_scene load_steps=2 format=3 uid="uid://c1qkwvbm0buj8"]
 
 [ext_resource type="PackedScene" uid="uid://cstejo0a727w2" path="res://interface/Hunger Bar.tscn" id="1_kr31u"]
-[ext_resource type="PackedScene" uid="uid://hwquoppnpf42" path="res://interface/Players Life Icons.tscn" id="2_ta0ak"]
-[ext_resource type="PackedScene" uid="uid://c83nsuqq0tc24" path="res://interface/Boot Meter.tscn" id="3_w1gny"]
 
 [node name="Interface" type="Control"]
 layout_mode = 3
@@ -24,17 +22,3 @@ offset_right = 1406.0
 offset_bottom = 1068.0
 grow_horizontal = 1
 grow_vertical = 1
-
-[node name="HBoxContainer2" parent="." instance=ExtResource("2_ta0ak")]
-layout_mode = 0
-offset_left = 1462.0
-offset_top = 17.0
-offset_right = 1502.0
-offset_bottom = 57.0
-
-[node name="HBoxContainer3" parent="." instance=ExtResource("3_w1gny")]
-layout_mode = 1
-offset_left = -514.0
-offset_top = 137.0
-offset_right = 286.0
-offset_bottom = 212.0
