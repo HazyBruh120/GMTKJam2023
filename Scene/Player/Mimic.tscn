@@ -249,9 +249,9 @@ shape = SubResource("RectangleShape2D_tg6ip")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EatArea"]
 shape = SubResource("CircleShape2D_asr74")
 
-[node name="LureArea" type="Area2D" parent="."]
-visible = false
-monitorable = false
+[node name="LureArea" type="Area2D" parent="." groups=["mimic"]]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LureArea"]
 shape = SubResource("CircleShape2D_so68a")
