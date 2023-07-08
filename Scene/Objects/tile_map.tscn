@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://mkcft8bq1n8o"]
 
-[ext_resource type="Texture2D" uid="uid://canxwveklk35t" path="res://Assets/Art/Tiles-SandstoneDungeons.png" id="1_uobjo"]
-[ext_resource type="Texture2D" uid="uid://c8gtukp7aafpw" path="res://Assets/Art/Tiles-Door-packs.png" id="2_bvkq6"]
-[ext_resource type="Texture2D" uid="uid://cgj12ktpvkiq6" path="res://Assets/Art/Tiles-Items-pack.png" id="3_rls7e"]
-[ext_resource type="Texture2D" uid="uid://bjp3llsok6dy6" path="res://Assets/Art/Tiles-Props-pack.png" id="4_dfxsa"]
+[ext_resource type="Texture2D" uid="uid://sncut5ra0cyo" path="res://Assets/Art/Tiles-SandstoneDungeons.png" id="1_uobjo"]
+[ext_resource type="Texture2D" uid="uid://c8jbo2peqn1am" path="res://Assets/Art/Tiles-Door-packs.png" id="2_bvkq6"]
+[ext_resource type="Texture2D" uid="uid://cvhuqg0nnpyob" path="res://Assets/Art/Tiles-Items-pack.png" id="3_rls7e"]
+[ext_resource type="Texture2D" uid="uid://b1ndqn7xu006j" path="res://Assets/Art/Tiles-Props-pack.png" id="4_dfxsa"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_dlsv6"]
 vertices = PackedVector2Array(-18.1521, 5.34539, -2.78406, 5.12267, -2.78406, 16.0362, -18.1521, 16.2589)

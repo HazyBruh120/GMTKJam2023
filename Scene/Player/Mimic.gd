@@ -20,8 +20,9 @@ func _ready():
 	add_child(quickTimer)
 
 func _process(delta):
+
 	var input_vector = velocity.normalized()
-	
+
 	modulate = Color.CRIMSON if is_hidden else  Color.WHITE
 	
 	var wantedTime = randf_range(0.1,0.9)
@@ -63,12 +64,12 @@ func _physics_process(delta):
 			boostMeter += delta
 	else:
 		boostMeter = 1
-	
+
 	if input_vector != Vector2.ZERO:
 		velocity = input_vector * SPEED
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
-	
+
 	move_and_slide()
 
 
