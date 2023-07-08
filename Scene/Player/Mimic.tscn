@@ -280,14 +280,19 @@ emission_shape = 1
 emission_sphere_radius = 10.0
 spread = 20.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+process_callback = 0
+position_smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+scale = Vector2(0.3, 0.3)
+transform = Transform2D(0.3, 0, 0, 0.3, 0, 0)
 follow_viewport_enabled = true
 follow_viewport_scale = 0.2
 
-[node name="Interface" parent="CanvasLayer" instance=ExtResource("3_kcfb5")]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-process_callback = 0
-position_smoothing_enabled = true
+[node name="Interface" parent="Camera2D/CanvasLayer" instance=ExtResource("3_kcfb5")]
+offset_left = 0.0
+offset_right = 1918.0
 
 [connection signal="timeout" from="StealthTimer" to="." method="_on_stealth_timer_timeout"]
