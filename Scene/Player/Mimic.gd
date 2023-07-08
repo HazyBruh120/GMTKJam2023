@@ -16,7 +16,7 @@ func _process(delta):
 	if animationState.get_current_node() == "Idle" :
 		$LureArea.monitorable = Input.is_action_pressed("lure")
 		$LureArea.visible = Input.is_action_pressed("lure")
-	
+
 	var input_vector = velocity.normalized()
 	if input_vector != Vector2.ZERO :
 		animationTree.set("parameters/Idle/blend_position",input_vector)
@@ -36,7 +36,7 @@ func _physics_process(delta):
 			boostMeter -= delta
 			particles.emitting = true
 	elif boostMeter < 1 :
-			boostMeter += delta  
+			boostMeter += delta
 	else:
 		boostMeter = 1
 
@@ -44,5 +44,5 @@ func _physics_process(delta):
 		velocity = input_vector * SPEED
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
-	
+
 	move_and_slide()
