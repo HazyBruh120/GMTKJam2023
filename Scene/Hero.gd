@@ -88,7 +88,7 @@ func _physics_process(delta):
 
 			while(true):
 
-				var rand_dist = randf_range(100, 400)
+				var rand_dist = randf_range(100, 600)
 				var rand_rot = PI/3 * random.randfn()
 				print(rand_dist)
 				print(rand_rot)
@@ -129,6 +129,16 @@ func _physics_process(delta):
 			# print(nav_agent.distance_to_target())
 			calc_velocity()
 
+	if $HitArea.has_overlapping_bodies():
+		for body in $HitArea.get_overlapping_bodies():
+			if body.is_in_group("mimic"):
+				if $AttackTimer.is_stopped():
+					target_still_hidden = false
+					$AttackTimer.start()
+
+				break
+
+
 
 	move_and_slide()
 
@@ -158,3 +168,4 @@ func _on_question_timer_timeout():
 	if emote.animation == "missing":
 		emote.play("default")
 	target_still_hidden = true
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://duaulf744u833"]
+[gd_scene load_steps=13 format=3 uid="uid://duaulf744u833"]
 
 [ext_resource type="Script" path="res://Scene/Hero.gd" id="1_qh1js"]
 [ext_resource type="Texture2D" uid="uid://cyxt8qxwor2sp" path="res://Assets/Art/Exclamation-Mark.png" id="2_dlxni"]
@@ -63,6 +63,8 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_kntck"]
+
 [node name="Hero" type="CharacterBody2D"]
 y_sort_enabled = true
 position = Vector2(2.08165e-12, 2.08165e-12)
@@ -104,5 +106,16 @@ sprite_frames = SubResource("SpriteFrames_vsosa")
 [node name="QuestionTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="HitArea" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("CircleShape2D_kntck")
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="InteractArea" to="." method="_on_interact_area_area_entered"]
 [connection signal="timeout" from="QuestionTimer" to="." method="_on_question_timer_timeout"]
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
