@@ -14,6 +14,17 @@ func _init():
 func _physics_process(delta):
 
 	if target_loot != null:
+		if target_loot.is_in_group("mimic"):
+			var space_state = get_world_2d().direct_space_state
+			var query = PhysicsRayQueryParameters2D.create(global_position, target_loot.global_position, collision_mask, [self])
+			var result = space_state.intersect_ray(query)
+
+			if result and result["collider"].is_in_group("mimic"):
+				nav_agent.target_position = target_loot.position
+
+		if nav_agent.distance_to_target() < 3:
+			target_loot = null
+
 		calc_velocity()
 
 	elif scanner.has_overlapping_areas():

@@ -228,7 +228,7 @@ states/Start/position = Vector2(202, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_33cmv"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_7qga8"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_ywsei")]
 graph_offset = Vector2(-456, -19)
 
-[node name="Mimic" type="CharacterBody2D"]
+[node name="Mimic" type="CharacterBody2D" groups=["mimic"]]
 y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_gqpi8")
@@ -244,10 +244,9 @@ visible = false
 position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_tg6ip")
 
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
+[node name="EatArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EatArea"]
 shape = SubResource("CircleShape2D_asr74")
 
 [node name="LureArea" type="Area2D" parent="."]
@@ -274,6 +273,7 @@ z_index = -1
 lifetime = 0.15
 emission_shape = 1
 emission_sphere_radius = 10.0
+spread = 20.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)
