@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c1qkwvbm0buj8"]
 
-[ext_resource type="PackedScene" uid="uid://cstejo0a727w2" path="res://interface/Hunger Bar.tscn" id="1_kr31u"]
-[ext_resource type="PackedScene" uid="uid://du1g70i6165m3" path="res://interface/Players Life Icons.tscn" id="2_ta0ak"]
+[ext_resource type="PackedScene" uid="uid://bxw1omuv3l0ou" path="res://interface/Hunger Bar.tscn" id="1_kr31u"]
+[ext_resource type="PackedScene" uid="uid://mid26xpi01mk" path="res://interface/Players Life Icons.tscn" id="2_ta0ak"]
 [ext_resource type="PackedScene" uid="uid://c83nsuqq0tc24" path="res://interface/Boot Meter.tscn" id="3_w1gny"]
 
 [node name="Interface" type="Control"]

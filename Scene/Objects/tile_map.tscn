@@ -1,9 +1,24 @@
-[gd_scene load_steps=10 format=3 uid="uid://ddk1x0taxnteo"]
+[gd_scene load_steps=13 format=3 uid="uid://mkcft8bq1n8o"]
 
 [ext_resource type="Texture2D" uid="uid://sncut5ra0cyo" path="res://Assets/Art/Tiles-SandstoneDungeons.png" id="1_uobjo"]
 [ext_resource type="Texture2D" uid="uid://c8jbo2peqn1am" path="res://Assets/Art/Tiles-Door-packs.png" id="2_bvkq6"]
 [ext_resource type="Texture2D" uid="uid://cvhuqg0nnpyob" path="res://Assets/Art/Tiles-Items-pack.png" id="3_rls7e"]
 [ext_resource type="Texture2D" uid="uid://b1ndqn7xu006j" path="res://Assets/Art/Tiles-Props-pack.png" id="4_dfxsa"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_dlsv6"]
+vertices = PackedVector2Array(-18.1521, 5.34539, -2.78406, 5.12267, -2.78406, 16.0362, -18.1521, 16.2589)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-18.1521, 5.34539, -2.78406, 5.12267, -2.78406, 16.0362, -18.1521, 16.2589)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_b2ay4"]
+vertices = PackedVector2Array(17.9293, 16.4816, 1.00226, 16.2589, 1.22499, 13.3635, 17.7066, 4.89994, -16.8157, 5.12267, -16.8157, 13.1408)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2, 5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-16.8157, 5.12267, 17.7066, 4.89994, 17.9293, 16.4816, 1.00226, 16.2589, 1.22499, 13.3635, -16.8157, 13.1408)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_m6iee"]
+vertices = PackedVector2Array(1.22499, 4.89994, 18.3748, 4.89994, 18.1521, 16.2589, 1.00226, 16.2589)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1.22499, 4.89994, 18.3748, 4.89994, 18.1521, 16.2589, 1.00226, 16.2589)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nvc35"]
 texture = ExtResource("1_uobjo")
@@ -24,6 +39,7 @@ texture_region_size = Vector2i(32, 32)
 5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:0/0/physics_layer_0/angular_velocity = 0.0
 5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-15.9527, 9.41012, 15.9459, 9.44941, 15.9459, 14.1741, 3.97663, 14.1741, 3.97663, 12.048, -15.897, 12.1385)
+5:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_b2ay4")
 6:0/0 = 0
 6:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:0/0/physics_layer_0/angular_velocity = 0.0
@@ -44,11 +60,13 @@ texture_region_size = Vector2i(32, 32)
 4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:1/0/physics_layer_0/angular_velocity = 0.0
 4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-15.9983, 10.0763, -3.97748, 10.0763, -4.15425, 14.1421, -16.1751, 14.1421)
+4:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_dlsv6")
 5:1/0 = 0
 5:1/0/y_sort_origin = 12
 5:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:1/0/physics_layer_0/angular_velocity = 0.0
 5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(4.15425, 9.54594, 15.468, 9.36917, 15.468, 13.9654, 4.33103, 13.9654)
+5:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_m6iee")
 6:1/0 = 0
 6:1/0/y_sort_origin = 14
 6:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -936,6 +954,7 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_0dlqj"]
 physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 2
 sources/0 = SubResource("TileSetAtlasSource_nvc35")
 sources/1 = SubResource("TileSetAtlasSource_mdw13")
 sources/3 = SubResource("TileSetAtlasSource_52bnh")

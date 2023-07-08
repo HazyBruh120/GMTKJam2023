@@ -1,7 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://yih435t43oki"]
+[gd_scene load_steps=31 format=3 uid="uid://yih435t43oki"]
 
 [ext_resource type="Script" path="res://Scene/Player/Mimic.gd" id="1_gqpi8"]
 [ext_resource type="Texture2D" uid="uid://cljb4x3brd1f8" path="res://Assets/Art/chest_mimic.png" id="2_4tsif"]
+[ext_resource type="PackedScene" uid="uid://c1qkwvbm0buj8" path="res://interface/interface.tscn" id="3_kcfb5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg6ip"]
 size = Vector2(15, 6.5)
@@ -268,6 +269,9 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Move/blend_position = Vector2(0, 0)
 
+[node name="StealthTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 z_index = -1
 lifetime = 0.15
@@ -275,7 +279,14 @@ emission_shape = 1
 emission_sphere_radius = 10.0
 spread = 20.0
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+follow_viewport_scale = 0.2
+
+[node name="Interface" parent="CanvasLayer" instance=ExtResource("3_kcfb5")]
+
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
 process_callback = 0
 position_smoothing_enabled = true
+
+[connection signal="timeout" from="StealthTimer" to="." method="_on_stealth_timer_timeout"]
