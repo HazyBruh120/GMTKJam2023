@@ -57,8 +57,10 @@ func _physics_process(delta):
 			input_vector *= 1.5
 			boostMeter -= delta
 			particles.emitting = true
+		else :
+			particles.emitting = false
 	elif boostMeter < 1 :
-			boostMeter += delta
+		boostMeter += delta
 	else:
 		boostMeter = 1
 
