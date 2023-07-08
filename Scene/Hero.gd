@@ -9,7 +9,7 @@ func _init():
 	pass
 
 func _physics_process(delta):
-	if scanner.has_overlapping_bodies():
+	if scanner.has_overlapping_areas():
 		var nearby_loot = scanner.get_overlapping_areas()
 
 		var target_loot: Area2D = nearby_loot[0]
@@ -21,9 +21,11 @@ func _physics_process(delta):
 		var next_pos: Vector2 = nav_agent.get_next_path_position()
 
 		velocity = (next_pos - position).normalized() * SPEED
+		print("yes", velocity)
 
 	else:
 		velocity.move_toward(Vector2.ZERO, SPEED)
+		print("no", velocity)
 
 	move_and_slide()
 

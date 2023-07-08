@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgsvbqxkwgp4g"]
+
+[ext_resource type="PackedScene" uid="uid://10e1kf74dd2k" path="res://Scene/Objects/Loot.tscn" id="1_rk6wc"]
+[ext_resource type="Texture2D" uid="uid://2g1w2ydc5rbv" path="res://Assets/Art/coin.png" id="2_vt6u8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k2fip"]
+
+[node name="Coins" instance=ExtResource("1_rk6wc")]
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("CircleShape2D_k2fip")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_vt6u8")
