@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvhuqg0nnpyob"
-path="res://.godot/imported/Tiles-Items-pack.png-1da9e2984e10ac43f9d6526135d31137.ctex"
+uid="uid://dhd6ji23sewgm"
+path="res://.godot/imported/fill.png-89d3eb27153172ea83d26718eaa25d2a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/Tiles-Items-pack.png"
-dest_files=["res://.godot/imported/Tiles-Items-pack.png-1da9e2984e10ac43f9d6526135d31137.ctex"]
+source_file="res://interface/Placeholder Bar Textures/fill.png"
+dest_files=["res://.godot/imported/fill.png-89d3eb27153172ea83d26718eaa25d2a.ctex"]
 
 [params]
 

@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://cstejo0a727w2"]
+
+[ext_resource type="Texture2D" uid="uid://dhoyt761ftpmt" path="res://interface/Placeholder Bar Textures/bg.png" id="1_7jpi8"]
+[ext_resource type="Texture2D" uid="uid://dhd6ji23sewgm" path="res://interface/Placeholder Bar Textures/fill.png" id="2_1r4tk"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -74.0
+offset_right = 480.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Hunger
+"
+horizontal_alignment = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+value = 40.0
+texture_under = ExtResource("1_7jpi8")
+texture_progress = ExtResource("2_1r4tk")
