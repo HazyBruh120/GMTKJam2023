@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://du1g70i6165m3"]
+
+[ext_resource type="Texture2D" uid="uid://dip1gbdq0ksgg" path="res://icon.svg" id="1_4c0y2"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+offset_left = 1447.0
+offset_top = 10.0
+offset_right = 1487.0
+offset_bottom = 50.0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="Life" type="TextureRect" parent="Control"]
+layout_mode = 2
+offset_top = -1.0
+offset_right = 128.0
+offset_bottom = 127.0
+texture = ExtResource("1_4c0y2")
+stretch_mode = 1
+
+[node name="Life2" type="TextureRect" parent="Control"]
+layout_mode = 2
+offset_left = 151.0
+offset_top = 1.0
+offset_right = 279.0
+offset_bottom = 129.0
+texture = ExtResource("1_4c0y2")
+stretch_mode = 1
+
+[node name="Life3" type="TextureRect" parent="Control"]
+layout_mode = 2
+offset_left = 302.0
+offset_top = -1.0
+offset_right = 430.0
+offset_bottom = 127.0
+texture = ExtResource("1_4c0y2")
+stretch_mode = 1
