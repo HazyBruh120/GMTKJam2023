@@ -1,9 +1,10 @@
-[gd_scene load_steps=35 format=3 uid="uid://yih435t43oki"]
+[gd_scene load_steps=36 format=3 uid="uid://yih435t43oki"]
 
 [ext_resource type="Script" path="res://Scene/Player/Mimic.gd" id="1_gqpi8"]
 [ext_resource type="Texture2D" uid="uid://cljb4x3brd1f8" path="res://Assets/Art/chest_mimic.png" id="2_4tsif"]
-[ext_resource type="PackedScene" uid="uid://c1qkwvbm0buj8" path="res://interface/interface.tscn" id="3_bvt5u"]
 [ext_resource type="Texture2D" uid="uid://pgxqursp1bdb" path="res://Assets/UI/Keyboard Extras.png" id="4_w581k"]
+[ext_resource type="Texture2D" uid="uid://dhoyt761ftpmt" path="res://interface/Placeholder Bar Textures/bg.png" id="5_6jtlg"]
+[ext_resource type="Texture2D" uid="uid://dhd6ji23sewgm" path="res://interface/Placeholder Bar Textures/fill.png" id="6_25sxu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg6ip"]
 size = Vector2(15, 6.5)
@@ -302,11 +303,13 @@ spread = 20.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Interface" parent="CanvasLayer" instance=ExtResource("3_bvt5u")]
-offset_left = 0.0
+[node name="UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 1920.0
+offset_bottom = 1080.0
 
-[node name="valueSlider" type="HScrollBar" parent="CanvasLayer/Interface"]
+[node name="valueSlider" type="HScrollBar" parent="CanvasLayer/UI"]
 modulate = Color(1, 0.486275, 0.113725, 1)
 layout_mode = 1
 anchors_preset = 5
@@ -318,7 +321,7 @@ offset_bottom = 64.0
 grow_horizontal = 2
 value = 50.0
 
-[node name="qteSlider" type="HScrollBar" parent="CanvasLayer/Interface"]
+[node name="qteSlider" type="HScrollBar" parent="CanvasLayer/UI"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -329,12 +332,40 @@ offset_bottom = 64.0
 grow_horizontal = 2
 value = 5.0
 
-[node name="prompt" type="AnimatedSprite2D" parent="CanvasLayer/Interface/qteSlider"]
+[node name="prompt" type="AnimatedSprite2D" parent="CanvasLayer/UI/qteSlider"]
 position = Vector2(338.542, 131.853)
 scale = Vector2(7.90446, 7.90446)
 sprite_frames = SubResource("SpriteFrames_ww8x3")
 autoplay = "default"
-frame_progress = 0.60478
+frame_progress = 0.142934
+
+[node name="HungerBar" type="TextureProgressBar" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -339.5
+offset_top = -70.0
+offset_right = 339.5
+grow_horizontal = 2
+grow_vertical = 0
+value = 40.0
+nine_patch_stretch = true
+texture_under = ExtResource("5_6jtlg")
+texture_progress = ExtResource("6_25sxu")
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/HungerBar"]
+layout_mode = 2
+offset_left = -62.0
+offset_right = -4.0
+offset_bottom = 26.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Hunger
+"
+horizontal_alignment = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)

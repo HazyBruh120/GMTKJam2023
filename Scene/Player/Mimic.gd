@@ -8,8 +8,9 @@ const SPEED = 150.0
 @onready var animationState = animationTree["parameters/playback"]
 @onready var particles = $CPUParticles2D
 @onready var stealthTimer:Timer = $StealthTimer
-@onready var qteSlider = $CanvasLayer/Interface/qteSlider
-@onready var valSlider = $CanvasLayer/Interface/valueSlider
+@onready var qteSlider = $CanvasLayer/UI/qteSlider
+@onready var valSlider = $CanvasLayer/UI/valueSlider
+@onready var HungerBar = $CanvasLayer/UI/HungerBar
 @onready var qteTimer = $qteTimer
 @onready var delayTimer = $delayTimer
 
@@ -29,7 +30,7 @@ func _process(delta):
 	modulate = Color.CRIMSON if is_hidden else Color.WHITE
 	
 	process_qte()
-	
+	process_hunger(delta)
 	var input_vector = velocity.normalized()
 	
 	if input_vector != Vector2.ZERO :
@@ -69,8 +70,14 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func process_hunger():
-	
+func on_hit():
+	hungerMeter = clamp(hungerMeter-0.2,0,1)
+	pass
+
+
+func process_hunger(delta:float=0.2):
+	hungerMeter = clamp(hungerMeter-delta,0,1)
+	HungerBar.value = hungerMeter
 	pass
 
 
@@ -96,11 +103,6 @@ func process_qte():
 		delayTimer.stop()
 	
 	qteSlider.value = qteTimer.time_left/qteTimer.wait_time*100
-
-
-func damage():
-	pass
-
 
 
 func _on_stealth_timer_timeout():
