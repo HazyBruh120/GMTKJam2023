@@ -286,8 +286,5 @@ transform = Transform2D(0.3, 0, 0, 0.3, 0, 0)
 follow_viewport_enabled = true
 follow_viewport_scale = 0.2
 
-[node name="Interface" parent="Camera2D/CanvasLayer" instance=ExtResource("3_kcfb5")]
-offset_left = 0.0
-offset_right = 1918.0
-
-[connection signal="timeout" from="StealthTimer" to="." method="_on_stealth_timer_timeout"]
+[node name="StealthTimer" type="Timer" parent="."]
+one_shot = true

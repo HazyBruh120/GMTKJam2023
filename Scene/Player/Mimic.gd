@@ -6,7 +6,7 @@ const SPEED = 150.0
 @onready var animationTree = $AnimationTree
 @onready var animationState = animationTree["parameters/playback"]
 @onready var particles = $CPUParticles2D
-@onready var stealthTimer:Timer = $StealthTimer 
+@onready var stealthTimer:Timer = $StealthTimer
 
 var boostMeter:float = 1
 var is_hidden:bool = false
@@ -24,7 +24,7 @@ func _process(delta):
 	var input_vector = velocity.normalized()
 
 	modulate = Color.CRIMSON if is_hidden else  Color.WHITE
-	
+
 	var wantedTime = randf_range(0.1,0.9)
 	var range = 0.2
 	print(quickTimer.time_left)
@@ -34,7 +34,7 @@ func _process(delta):
 		quickTimer.start()
 	else:
 		quickTimer.stop()
-		
+
 	if input_vector != Vector2.ZERO :
 		animationTree.set("parameters/Idle/blend_position",input_vector)
 		animationTree.set("parameters/Move/blend_position",input_vector)
@@ -48,10 +48,10 @@ func _process(delta):
 	else :
 		if !is_hidden and stealthTimer.is_stopped():
 			stealthTimer.start()
-		
+
 	#	$LureArea.monitorable = Input.is_action_pressed("lure")
 		$LureArea.visible = Input.is_action_pressed("lure")
-		
+
 
 func _physics_process(delta):
 	var input_vector = Input.get_vector("game_left", "game_right","game_up", "game_down")
