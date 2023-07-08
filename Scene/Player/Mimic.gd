@@ -17,16 +17,16 @@ func _ready():
 func _process(delta):
 
 	var input_vector = velocity.normalized()
-	
+
 	modulate = Color.CRIMSON if is_hidden else  Color.WHITE
-	
+
 	if animationState.get_current_node() == "Idle":
 		if !is_hidden and stealthTimer.is_stopped():
 			stealthTimer.start()
 
 	#	$LureArea.monitorable = Input.is_action_pressed("lure")
 		$LureArea.visible = Input.is_action_pressed("lure")
-		
+
 	if input_vector != Vector2.ZERO :
 		animationTree.set("parameters/Idle/blend_position",input_vector)
 		animationTree.set("parameters/Move/blend_position",input_vector)
@@ -49,7 +49,7 @@ func _physics_process(delta):
 			boostMeter += delta
 	else:
 		boostMeter = 1
-	
+
 	if input_vector != Vector2.ZERO:
 		velocity = input_vector * SPEED
 	else:
