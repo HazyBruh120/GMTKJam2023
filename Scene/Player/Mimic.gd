@@ -8,8 +8,8 @@ const SPEED = 150.0
 @onready var animationState = animationTree["parameters/playback"]
 @onready var particles = $CPUParticles2D
 @onready var stealthTimer:Timer = $StealthTimer
-@onready var qteSlider = $qteSlider
-@onready var valSlider = $valueSlider
+@onready var qteSlider = $CanvasLayer/Interface/qteSlider
+@onready var valSlider = $CanvasLayer/Interface/valueSlider
 @onready var qteTimer = $qteTimer
 @onready var delayTimer = $delayTimer
 
@@ -69,6 +69,11 @@ func _physics_process(delta):
 	move_and_slide()
 
 
+func process_hunger():
+	
+	pass
+
+
 func process_qte():
 	if (qte["wantedTime"] < qteTimer.time_left-qte_range or qte["wantedTime"] > qteTimer.time_left+qte_range) and \
 		Input.is_action_just_pressed("qte") and \
@@ -78,6 +83,8 @@ func process_qte():
 	elif (qte["wantedTime"] > qteTimer.time_left-qte_range and qte["wantedTime"] < qteTimer.time_left+qte_range) and \
 		Input.is_action_just_pressed("qte") and \
 		qteTimer.time_left <= qteTimer.wait_time:
+		qteSlider.visible = false
+		valSlider.visible = false
 		qte["success"] = true
 	
 	if is_hidden and delayTimer.is_stopped() and qteTimer.is_stopped():
@@ -89,6 +96,11 @@ func process_qte():
 		delayTimer.stop()
 	
 	qteSlider.value = qteTimer.time_left/qteTimer.wait_time*100
+
+
+func damage():
+	pass
+
 
 
 func _on_stealth_timer_timeout():
