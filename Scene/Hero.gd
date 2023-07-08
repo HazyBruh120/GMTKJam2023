@@ -12,10 +12,25 @@ var target_loot: Area2D = null
 var has_move_target = false
 var target_still_hidden = true
 
+var random = null
+
+var is_first_move = true
+
+
 func _init():
-	pass
+
+	velocity = Vector2.UP
+	random = RandomNumberGenerator.new()
+	print(random)
+	random.randomize()
 
 func _physics_process(delta):
+	if (is_first_move):
+		is_first_move = false
+		has_move_target = true
+		nav_agent.target_position = global_transform.origin + Vector2.DOWN * 15
+
+
 	if not is_instance_valid(target_loot):
 		target_loot = null
 		if emote.animation != "missing":
@@ -73,7 +88,16 @@ func _physics_process(delta):
 
 			while(true):
 
-				var target_random = Vector2(randi_range(-300, 300), randi_range(-300, 300))
+				var rand_dist = randf_range(100, 400)
+				var rand_rot = PI/3 * random.randfn()
+				print(rand_dist)
+				print(rand_rot)
+
+				var target_random = velocity.normalized() * rand_dist
+				target_random = target_random.rotated(rand_rot) + global_transform.origin
+
+				print(target_random)
+
 				if emote.animation == "missing":
 					var dir = velocity.normalized()
 					var scan_vec = dir * 30
@@ -94,7 +118,6 @@ func _physics_process(delta):
 
 					target_random = a*vec1 + b*vec2 + c*vec3
 					target_random += global_transform.origin
-					print(target_random)
 
 				nav_agent.target_position = target_random
 
