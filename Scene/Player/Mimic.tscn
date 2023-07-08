@@ -235,6 +235,7 @@ motion_mode = 1
 script = ExtResource("1_gqpi8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(0, -5)
 texture = ExtResource("2_4tsif")
 hframes = 5
@@ -244,6 +245,20 @@ vframes = 4
 visible = false
 position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_tg6ip")
+
+[node name="valueSlider" type="HScrollBar" parent="."]
+modulate = Color(1, 0.486275, 0.113725, 1)
+offset_left = -64.0
+offset_top = 15.0
+offset_right = 64.0
+offset_bottom = 23.0
+
+[node name="qteSlider" type="HScrollBar" parent="."]
+offset_left = -64.0
+offset_top = 15.0
+offset_right = 64.0
+offset_bottom = 23.0
+value = 5.0
 
 [node name="EatArea" type="Area2D" parent="."]
 
@@ -277,13 +292,22 @@ emission_sphere_radius = 10.0
 spread = 20.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
+zoom = Vector2(3, 3)
 process_callback = 0
 position_smoothing_enabled = true
 
 [node name="Interface" parent="Camera2D" instance=ExtResource("3_bvt5u")]
+visible = false
 
 [node name="StealthTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="qteTimer" type="Timer" parent="."]
+
+[node name="delayTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="timeout" from="StealthTimer" to="." method="_on_stealth_timer_timeout"]
+[connection signal="timeout" from="qteTimer" to="." method="_on_qte_timer_timeout"]
+[connection signal="timeout" from="delayTimer" to="." method="_on_delay_timer_timeout"]
