@@ -18,28 +18,38 @@ func _physics_process(delta):
 
 	elif scanner.has_overlapping_areas():
 		var nearby_loot = scanner.get_overlapping_areas()
-		has_move_target = false
+		var space_state = get_world_2d().direct_space_state
 
-		target_loot = nearby_loot[0]
+		target_loot = null
 		for loot in nearby_loot:
-			if position.distance_to(loot.position) < position.distance_to(target_loot.position):
-				target_loot = loot
 
-		nav_agent.target_position = target_loot.global_position
+			var query = PhysicsRayQueryParameters2D.create(global_position, loot.global_position, collision_mask, [self])
+			var result = space_state.intersect_ray(query)
 
-	elif not has_move_target or (has_move_target and (nav_agent.distance_to_target() < 10 or nav_agent.is_target_reached())):
+			if not result or (result and result["collider"].is_in_group("loot")):
+				if target_loot == null or position.distance_to(loot.position) < position.distance_to(target_loot.position):
+					target_loot = loot
 
-		while(true):
-			var target_random = Vector2(randi_range(-300, 300), randi_range(-300, 300))
-			nav_agent.target_position = target_random
+		if target_loot != null:
+			has_move_target = false
+			nav_agent.target_position = target_loot.global_position
 
-			if nav_agent.is_target_reachable():
-				has_move_target = true
-				break
+	if target_loot == null:
+		if not has_move_target or (has_move_target and (nav_agent.distance_to_target() < 10 or nav_agent.is_target_reached())):
 
-	else:
-		print(nav_agent.distance_to_target())
-		calc_velocity()
+			while(true):
+				var target_random = Vector2(randi_range(-300, 300), randi_range(-300, 300))
+				nav_agent.target_position = target_random
+
+				if nav_agent.is_target_reachable():
+					print("reachable")
+					has_move_target = true
+					break
+
+		else:
+			# print(nav_agent.distance_to_target())
+			print("moving")
+			calc_velocity()
 
 
 	move_and_slide()
