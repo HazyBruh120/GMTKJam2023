@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://10e1kf74dd2k"]
 
-[node name="Loot" type="Node2D"]
+[node name="Loot" type="Node2D" groups=["loot"]]
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
