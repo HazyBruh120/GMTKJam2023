@@ -12,8 +12,9 @@ func _ready():
 	animationTree.active = true
 
 func _process(delta):
-	$LureArea.monitorable = Input.is_action_pressed("lure")
-	$LureArea.visible = Input.is_action_pressed("lure")
+	if animationState.get_current_node() == "Idle" :
+		$LureArea.monitorable = Input.is_action_pressed("lure")
+		$LureArea.visible = Input.is_action_pressed("lure")
 	
 	var input_vector = velocity.normalized()
 	if input_vector != Vector2.ZERO :
