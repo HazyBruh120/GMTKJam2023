@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 150.0
 @export var qte_range:float = 0.2
-@export var depletion_speed:float = 0.1
+@export var depletion_speed:float = 0.5
 
 @onready var animationPlayer = $AnimationPlayer
 @onready var animationTree = $AnimationTree
@@ -33,14 +33,15 @@ func _ready():
 	qte["wantedTime"] = randf_range(0.1,0.9)
 
 func _process(delta):
+	print(animationState.get_current_node())
 	$Sprite2D.modulate = Color.DIM_GRAY if is_hidden else Color.WHITE
-	process_hunger(depletion_speed*delta)
+	process_hunger(depletion_speed/10*delta)
 	if !( biting_check() and delayTimer.is_stopped() and qteTimer.is_stopped() ):
 		process_qte()
 	else :
 		bite()
 	var input_vector = velocity.normalized()
-
+	
 	if input_vector != Vector2.ZERO :
 		animationTree.set("parameters/Idle/blend_position",input_vector)
 		animationTree.set("parameters/Move/blend_position",input_vector)
@@ -61,6 +62,7 @@ func _physics_process(delta):
 	var input_vector = Input.get_vector("game_left", "game_right","game_up", "game_down")
 	if Input.is_action_pressed("boost") and input_vector != Vector2.ZERO:
 		if boostMeter > 0.0 :
+			process_hunger(depletion_speed/10*delta)
 			input_vector *= 1.5
 			boostMeter -= delta
 			particles.emitting = true
@@ -89,7 +91,7 @@ func on_hit(dmg:float=0.2):
 
 func biting_check()->bool:
 	for node in $EatArea.get_overlapping_bodies():
-		if node.is_in_group("hero") and node.is_biteable():
+		if node.is_in_group("hero") and node.is_biteable() and to_bite == null:
 			to_bite = node
 			return true
 	to_bite = null
@@ -98,9 +100,12 @@ func biting_check()->bool:
 
 func bite():
 	if  animationState.get_current_node() != "Bite" and \
-		Input.is_action_just_pressed("qte") :
-		animationState.travel("Bite")
+		Input.is_action_just_pressed("qte") and \
+		to_bite != null:
+		if animationState.get_current_node() != "Bite" :
+			animationState.travel("Bite")
 		to_bite.bit()
+		to_bite == null
 
 
 func process_hunger(delta:float=0.2):

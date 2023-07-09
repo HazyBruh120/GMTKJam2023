@@ -69,9 +69,46 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_v7vvd"]
 resource_name = "FailQTE"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 19)]
+}
 
 [sub_resource type="Animation" id="Animation_rngq0"]
 resource_name = "Hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0499388, 0.100321, 0.150259, 0.199755),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 18), Vector2i(1, 18), Vector2i(2, 18), Vector2i(3, 18), Vector2i(0, 18)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.201405),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.760784, 0.156863, 0.25098, 1), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_itoni"]
 resource_name = "SideBite"
@@ -286,18 +323,14 @@ blend_mode = 1
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6w0x2"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5xaru"]
 switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_goxjc"]
 switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h7406"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xhgnf"]
 allow_transition_to_self = true
@@ -314,7 +347,7 @@ states/Move/node = SubResource("AnimationNodeBlendSpace2D_k87m4")
 states/Move/position = Vector2(592, 100)
 states/Start/position = Vector2(202, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_33cmv"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_7qga8"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_ywsei"), "Idle", "FailQTE", SubResource("AnimationNodeStateMachineTransition_5mktv"), "FailQTE", "Idle", SubResource("AnimationNodeStateMachineTransition_qp2qy"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_6w0x2"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_5xaru"), "Bite", "Idle", SubResource("AnimationNodeStateMachineTransition_goxjc"), "Idle", "Bite", SubResource("AnimationNodeStateMachineTransition_h7406")]
-graph_offset = Vector2(-201, -4)
+graph_offset = Vector2(-279, -162)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wairh"]
 bg_color = Color(0, 0.682353, 0.72549, 1)
@@ -363,12 +396,13 @@ emission_sphere_radius = 19.25
 spread = 20.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.760784, 0.156863, 0.25098, 1)
 z_index = 1
 position = Vector2(0, -32)
 texture = ExtResource("2_qtqdg")
 hframes = 4
 vframes = 19
-frame = 64
+frame = 72
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.321907, -3.79297)
