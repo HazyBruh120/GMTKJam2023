@@ -12,8 +12,9 @@
 [ext_resource type="AudioStream" uid="uid://cs3i4j8281kcl" path="res://Scene/Player/Assets/FOOTSTEP - Metal Plate Jump Barefoot Male - 17_loop.wav" id="9_bfcvi"]
 [ext_resource type="AudioStream" uid="uid://cbda1ulxxso1l" path="res://Scene/Player/Assets/Alien_Damage_1__calicrazed.com.wav" id="10_g1vit"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tg6ip"]
-size = Vector2(23.0433, 7.08594)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rurfx"]
+radius = 4.16744
+height = 24.3331
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_asr74"]
 radius = 52.6451
@@ -509,7 +510,6 @@ emission_sphere_radius = 19.25
 spread = 20.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 1
 position = Vector2(0, -32)
 texture = ExtResource("2_qtqdg")
 hframes = 4
@@ -518,7 +518,8 @@ frame = 75
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.321907, -3.79297)
-shape = SubResource("RectangleShape2D_tg6ip")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_rurfx")
 
 [node name="EatArea" type="Area2D" parent="."]
 
