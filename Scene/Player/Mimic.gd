@@ -115,7 +115,7 @@ func _on_stealth_timer_timeout():
 func _on_delay_timer_timeout():
 	qteSlider.visible = true
 	valSlider.visible = true
-	qte["wantedTime"] = randf_range(0.1,qteTimer.wait_time-0.25)
+	qte["wantedTime"] = randf_range(0.1,qteTimer.wait_time-0.40)
 	valSlider.value = qte["wantedTime"]*100
 	qteTimer.start()
 
