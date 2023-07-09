@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://wljqgv8wa40f"]
+[gd_scene load_steps=9 format=3 uid="uid://wljqgv8wa40f"]
 
 [ext_resource type="Script" path="res://Scene/Shipping Levels/main.gd" id="1_2k4rt"]
 [ext_resource type="AudioStream" uid="uid://chprwx1bpe3qc" path="res://Assets/Music/horror-story-woods.wav" id="2_874r1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cfb1vbu4c65t7" path="res://Assets/UI/chestpng.png" id="5_0axbm"]
 [ext_resource type="Theme" uid="uid://crqohgh136tp8" path="res://Assets/UI/theme/kenneyUI.tres" id="5_ob5wx"]
 [ext_resource type="AudioStream" uid="uid://dtdtr5iayjff3" path="res://Assets/Music/Ludum Dare 28 - Track 7.wav" id="5_qfp10"]
+[ext_resource type="Texture2D" uid="uid://d2n0usgnr5tgs" path="res://Assets/Art/title.png" id="7_vaxru"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_2k4rt")
@@ -44,27 +45,34 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -368.0
-offset_top = -553.0
-offset_right = 1536.0
-offset_bottom = 1535.0
+offset_left = -10.0
+offset_top = -545.0
+offset_right = 1894.0
+offset_bottom = 1543.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_0axbm")
 stretch_mode = 5
 
+[node name="TextureRect2" type="TextureRect" parent="Menu"]
+layout_mode = 0
+offset_left = 356.0
+offset_top = 64.0
+offset_right = 906.0
+offset_bottom = 614.0
+texture = ExtResource("7_vaxru")
+expand_mode = 2
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -150.0
-offset_top = -233.0
-offset_right = 150.0
-grow_horizontal = 2
+offset_left = 463.0
+offset_top = -441.0
+offset_right = 763.0
+offset_bottom = -208.0
 grow_vertical = 0
 theme = ExtResource("5_ob5wx")
 
@@ -133,10 +141,10 @@ theme_override_font_sizes/font_size = 32
 text = "Next Level
 "
 
-[node name="ColorRect" type="ColorRect" parent="NextLevel/VBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 40)
+[node name="Back" type="Button" parent="NextLevel/VBoxContainer"]
 layout_mode = 2
-color = Color(0, 0, 0, 0)
+theme_override_font_sizes/font_size = 32
+text = "Back"
 
 [node name="Quit" type="Button" parent="NextLevel/VBoxContainer"]
 layout_mode = 2
@@ -193,10 +201,10 @@ theme_override_font_sizes/font_size = 32
 text = "Redo Level
 "
 
-[node name="ColorRect" type="ColorRect" parent="RestartLevel/VBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 40)
+[node name="Back" type="Button" parent="RestartLevel/VBoxContainer"]
 layout_mode = 2
-color = Color(0, 0, 0, 0)
+theme_override_font_sizes/font_size = 32
+text = "Back"
 
 [node name="Quit" type="Button" parent="RestartLevel/VBoxContainer"]
 layout_mode = 2
@@ -354,8 +362,10 @@ text = "Quit"
 [connection signal="pressed" from="Menu/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="NextLevel/VBoxContainer/Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="NextLevel/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="NextLevel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="RestartLevel/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="RestartLevel/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="RestartLevel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Credits/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Finish/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
