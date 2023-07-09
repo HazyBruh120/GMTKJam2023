@@ -12,7 +12,7 @@
 size = Vector2(23.0433, 7.08594)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_asr74"]
-radius = 214.659
+radius = 52.6451
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_so68a"]
 radius = 51.2498
@@ -395,7 +395,7 @@ states/Move/node = SubResource("AnimationNodeBlendSpace2D_k87m4")
 states/Move/position = Vector2(592, 100)
 states/Start/position = Vector2(202, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_33cmv"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_7qga8"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_ywsei"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_6w0x2"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_5xaru"), "Bite", "Idle", SubResource("AnimationNodeStateMachineTransition_goxjc"), "Idle", "Bite", SubResource("AnimationNodeStateMachineTransition_h7406"), "Idle", "FailQTE", SubResource("AnimationNodeStateMachineTransition_5ktcd"), "FailQTE", "Idle", SubResource("AnimationNodeStateMachineTransition_wl3hd")]
-graph_offset = Vector2(-300, 71)
+graph_offset = Vector2(-310, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_llx7r"]
 atlas = ExtResource("4_w581k")
@@ -490,7 +490,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 
 [node name="prompt" type="AnimatedSprite2D" parent="CanvasLayer/UI"]
-position = Vector2(961.542, 131.853)
+position = Vector2(961.542, 140.853)
 scale = Vector2(7.90446, 7.90446)
 sprite_frames = SubResource("SpriteFrames_ww8x3")
 autoplay = "default"
@@ -503,8 +503,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -337.0
+offset_top = 5.0
 offset_right = 337.0
-offset_bottom = 64.0
+offset_bottom = 69.0
 grow_horizontal = 2
 theme_override_styles/grabber = SubResource("StyleBoxFlat_wairh")
 value = 50.0
@@ -515,8 +516,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -337.0
+offset_top = 5.0
 offset_right = 337.0
-offset_bottom = 64.0
+offset_bottom = 69.0
 grow_horizontal = 2
 theme_override_styles/scroll = SubResource("StyleBoxEmpty_8sq5i")
 theme_override_styles/grabber = SubResource("StyleBoxFlat_f4mom")
@@ -567,11 +569,15 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
+[node name="pushTimer" type="Timer" parent="."]
+
 [node name="SuccessSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_1cvxp")
+volume_db = -1.5
 
 [node name="FailSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_nwisi")
+volume_db = -1.0
 
 [node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
 visible = false
@@ -581,3 +587,4 @@ stream = ExtResource("6_1cvxp")
 [connection signal="timeout" from="StealthTimer" to="." method="_on_stealth_timer_timeout"]
 [connection signal="timeout" from="qteTimer" to="." method="_on_qte_timer_timeout"]
 [connection signal="timeout" from="delayTimer" to="." method="_on_delay_timer_timeout"]
+[connection signal="timeout" from="pushTimer" to="." method="_on_push_timer_timeout"]
