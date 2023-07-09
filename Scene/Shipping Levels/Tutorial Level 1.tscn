@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dk4f2iyxlqa2w"]
+[gd_scene load_steps=7 format=3 uid="uid://dk4f2iyxlqa2w"]
 
+[ext_resource type="Script" path="res://Scene/Shipping Levels/Tutorial Level 1.gd" id="1_1sley"]
 [ext_resource type="PackedScene" uid="uid://mkcft8bq1n8o" path="res://Scene/Objects/tile_map.tscn" id="1_6yhfy"]
 [ext_resource type="PackedScene" uid="uid://yih435t43oki" path="res://Scene/Player/Mimic.tscn" id="2_dh2tn"]
 [ext_resource type="Texture2D" uid="uid://dip1gbdq0ksgg" path="res://icon.svg" id="3_aggix"]
@@ -9,7 +10,11 @@ vertices = PackedVector2Array(282, 118, 840, 118, 549, 153, 497, 152, 283, 391, 
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(2, 1, 6, 7)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(282, 118, 283, 391, 844, 394, 840, 118), PackedVector2Array(497, 152, 493, 370, 548, 371, 549, 153)])
 
-[node name="CG_Gym_SmallLevel" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjfcx"]
+size = Vector2(126, 71)
+
+[node name="Tutorial Level 1" type="Node2D"]
+script = ExtResource("1_1sley")
 
 [node name="TileMap" parent="." instance=ExtResource("1_6yhfy")]
 layer_0/name = "Ground"
@@ -41,3 +46,12 @@ offset_right = 536.0
 offset_bottom = 183.0
 text = "Use the WASD keys to move 
 throught the dungeon!"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(736, 244)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(53, 82)
+shape = SubResource("RectangleShape2D_jjfcx")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
