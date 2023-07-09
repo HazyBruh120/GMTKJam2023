@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://Scene/Player/Mimic.gd" id="1_gqpi8"]
 [ext_resource type="Texture2D" uid="uid://cljb4x3brd1f8" path="res://Assets/Art/chest_mimic.png" id="2_4tsif"]
+[ext_resource type="Texture2D" uid="uid://ca3i3xrrtdp0d" path="res://Assets/UI/top.png" id="4_asdet"]
 [ext_resource type="Texture2D" uid="uid://pgxqursp1bdb" path="res://Assets/UI/Keyboard Extras.png" id="4_w581k"]
-[ext_resource type="Texture2D" uid="uid://dhoyt761ftpmt" path="res://interface/Placeholder Bar Textures/bg.png" id="5_6jtlg"]
+[ext_resource type="Texture2D" uid="uid://gxdlj7x0r6cn" path="res://Assets/UI/bottom.png" id="5_fnvfs"]
 [ext_resource type="AudioStream" uid="uid://ce0ljar2p0q1p" path="res://Scene/Player/Assets/SuccessSound.tres" id="6_1cvxp"]
-[ext_resource type="Texture2D" uid="uid://dhd6ji23sewgm" path="res://interface/Placeholder Bar Textures/fill.png" id="6_25sxu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg6ip"]
 size = Vector2(15, 6.5)
@@ -364,24 +364,26 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -339.5
-offset_top = -70.0
-offset_right = 339.5
+offset_left = -339.0
+offset_top = -130.0
+offset_right = 340.0
 grow_horizontal = 2
 grow_vertical = 0
-value = 40.0
+value = 30.0
 nine_patch_stretch = true
-texture_under = ExtResource("5_6jtlg")
-texture_progress = ExtResource("6_25sxu")
+texture_over = ExtResource("4_asdet")
+texture_progress = ExtResource("5_fnvfs")
 
 [node name="Label" type="Label" parent="CanvasLayer/UI/HungerBar"]
 layout_mode = 2
-offset_left = -62.0
-offset_right = -4.0
-offset_bottom = 26.0
+offset_left = 526.383
+offset_top = 8.81946
+offset_right = 634.383
+offset_bottom = 53.8195
 size_flags_horizontal = 0
 size_flags_vertical = 0
-text = "Hunger
+theme_override_font_sizes/font_size = 30
+text = "Satiety
 "
 horizontal_alignment = 2
 

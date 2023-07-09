@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 150.0
 @export var qte_range:float = 0.2
+@export var depletion_speed:float = 0.1
 
 @onready var animationTree = $AnimationTree
 @onready var animationState = animationTree["parameters/playback"]
@@ -20,6 +21,7 @@ var hungerMeter:float = 1
 var is_hidden:bool = false
 var qte = {
 	"wantedTime": randf_range(0.1,0.9), ## Randomized every qte
+	"done": false, ## for use in the process
 	"success": false ## for use in the process
 	}
 
@@ -29,9 +31,8 @@ func _ready():
 
 func _process(delta):
 	$Sprite2D.modulate = Color.DIM_GRAY if is_hidden else Color.WHITE
-	
 	process_qte()
-	process_hunger(delta)
+	process_hunger(depletion_speed*delta)
 	var input_vector = velocity.normalized()
 	
 	if input_vector != Vector2.ZERO :
@@ -62,8 +63,10 @@ func _physics_process(delta):
 			particles.emitting = false
 	elif boostMeter < 1 :
 		boostMeter += delta
+		particles.emitting = false
 	else:
 		boostMeter = 1
+		particles.emitting = false
 
 	if input_vector != Vector2.ZERO:
 		velocity = input_vector * SPEED
@@ -79,28 +82,33 @@ func on_hit(dmg:float=0.2):
 	pass
 
 
+func biting():
+	
+	pass
+
+
 func process_hunger(delta:float=0.2):
 	hungerMeter = clamp(hungerMeter-delta,0,1)
-	HungerBar.value = hungerMeter
+	HungerBar.value = remap(hungerMeter,0,1,30,100)
 	pass
 
 
 func process_qte():
-	if (qte["wantedTime"] < qteTimer.time_left-qte_range or qte["wantedTime"] > qteTimer.time_left+qte_range) and \
-		Input.is_action_just_pressed("qte") and \
-		qteTimer.time_left <= qteTimer.wait_time:
-		is_hidden = false
-		qte["success"] = false
-		PlayerSFX.stream = load("res://Scene/Player/Assets/FailSound.tres")
-		PlayerSFX.play()
-	elif (qte["wantedTime"] > qteTimer.time_left-qte_range and qte["wantedTime"] < qteTimer.time_left+qte_range) and \
-		Input.is_action_just_pressed("qte") and \
-		qteTimer.time_left <= qteTimer.wait_time:
-		qteSlider.visible = false
-		valSlider.visible = false
-		qte["success"] = true
-		PlayerSFX.stream = load("res://Scene/Player/Assets/SuccessSound.tres")
-		PlayerSFX.play()
+	if !qte["done"]:
+		if (qte["wantedTime"] > qteTimer.time_left-qte_range and qte["wantedTime"] < qteTimer.time_left+qte_range) and \
+			Input.is_action_just_pressed("qte") and \
+			qteTimer.time_left <= qteTimer.wait_time:
+			qteSlider.visible = false
+			valSlider.visible = false
+			qte["success"] = true
+			qte["done"] = true
+			play_sound("res://Scene/Player/Assets/SuccessSound.tres")
+		elif  Input.is_action_just_pressed("qte") and \
+			qteTimer.time_left <= qteTimer.wait_time:
+			is_hidden = false
+			qte["success"] = false
+			qte["done"] = true
+			play_sound("res://Scene/Player/Assets/FailSound.tres")
 	
 	if is_hidden and delayTimer.is_stopped() and qteTimer.is_stopped():
 		delayTimer.start()
@@ -111,6 +119,13 @@ func process_qte():
 		delayTimer.stop()
 	
 	qteSlider.value = qteTimer.time_left/qteTimer.wait_time*100
+
+
+func play_sound(file):
+	PlayerSFX.stream = null
+	PlayerSFX.stream = load(file)
+	PlayerSFX.seek(0)
+	PlayerSFX.play()
 
 
 func _on_stealth_timer_timeout():
@@ -127,6 +142,9 @@ func _on_delay_timer_timeout():
 func _on_qte_timer_timeout():
 	qteSlider.visible = false
 	valSlider.visible = false
+	if !qte["success"] :
+		play_sound("res://Scene/Player/Assets/FailSound.tres")
 	is_hidden = qte["success"]
-	delayTimer.start()
 	qte["success"] = false
+	qte["done"] = false
+	delayTimer.start()
