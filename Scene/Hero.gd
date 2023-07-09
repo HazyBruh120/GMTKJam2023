@@ -30,12 +30,7 @@ func _init():
 
 	velocity = Vector2.UP
 	random = RandomNumberGenerator.new()
-	print(random)
 	random.randomize()
-
-
-
-
 
 
 func _physics_process(delta):
@@ -116,13 +111,9 @@ func _physics_process(delta):
 
 				var rand_dist = randf_range(100, 600)
 				var rand_rot = PI/3 * random.randfn()
-				print(rand_dist)
-				print(rand_rot)
 
 				var target_random = velocity.normalized() * rand_dist
 				target_random = target_random.rotated(rand_rot) + global_transform.origin
-
-				print(target_random)
 
 				if emote.animation == "missing":
 					var dir = velocity.normalized()
@@ -196,6 +187,7 @@ func bit():
 	if health <= 0:
 		anim_player.play("death")
 		dying = true
+		return
 
 	$Audio/HitSound.play()
 	anim_player.play("hit")
