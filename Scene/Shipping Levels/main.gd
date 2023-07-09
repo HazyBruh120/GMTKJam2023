@@ -9,11 +9,7 @@ var state = "menu"
 
 
 func _ready():
-	curr_level = TUTLVL1.instantiate()
-	add_child(curr_level)
-	process_state_change("game")
-	curr_level.win.connect(handle_win)
-	print(curr_level.name)
+	process_state_change("menu")
 
 
 func _process(delta):
@@ -26,8 +22,11 @@ func process_state_change(new_state):
 		if music.playing:
 			music.stop()
 
+	$Menu.hide()
+
 	if state == "menu":
 		$Music/IntroMusic.play()
+		$Menu.show()
 	elif state == "game":
 		$Music/GameplayMusic.play()
 	elif state == "win":
@@ -49,3 +48,14 @@ func swap_level(new_level):
 	add_child(curr_level)
 	curr_level.win.connect(handle_win)
 
+
+
+func _on_start_pressed():
+	curr_level = TUTLVL1.instantiate()
+	add_child(curr_level)
+	process_state_change("game")
+	curr_level.win.connect(handle_win)
+
+
+func _on_quit_pressed():
+	get_tree().quit()
