@@ -53,8 +53,6 @@ func _process(delta):
 			animationTree.set("parameters/FailQTE/blend_position",input_vector)
 			particles.gravity = particles.gravity.rotated(particles.gravity.angle_to(-input_vector))
 			is_hidden = false
-			if !$JumpSound.playing :
-				$JumpSound.play()
 			if animationState.get_current_node() != "Move" :
 				animationState.travel("Move")
 		elif animationState.get_current_node() != "Idle" :
@@ -94,7 +92,7 @@ func _physics_process(delta):
 func on_hit(dmg:float=0.2):
 	hungerMeter = clamp(hungerMeter-dmg,0,1) if !biting else clamp(hungerMeter-dmg,0,1)
 	animationState.travel("Hit")
-	if !$FailSound.playing :
+	if !$dmgSound.playing :
 		$dmgSound.play()
 
 
@@ -146,9 +144,6 @@ func process_qte():
 			qte["done"] = true
 			if !$SuccessSound.playing :
 				$SuccessSound.play()
-			else:
-				$SuccessSound.stop()
-				$SuccessSound.play()
 		else :
 			is_hidden = false
 			qteSlider.visible = false
@@ -157,9 +152,6 @@ func process_qte():
 			qte["success"] = false
 			qte["done"] = true
 			if !$FailSound.playing :
-				$FailSound.play()
-			else:
-				$FailSound.stop()
 				$FailSound.play()
 			animationState.travel("FailQTE")
 	
