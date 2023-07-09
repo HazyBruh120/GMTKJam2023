@@ -10,6 +10,13 @@ func _ready():
 func _process(delta):
 	pass
 
-func _on_Hitbox_area_extended(area: Area2D) -> void:
-	if area.is_in_group("Mimic"):
-		get_tree().change_Scene("Tesrt Level");
+
+#	if area.is_in_group("Mimic"):
+#		get_tree().change_Scene("Tesrt Level");
+
+
+func _on_area_2d_body_entered(body):
+	if body.is_in_group("Mimic"):
+		#print("res://Scene/Test Level/Tesrt Level.tscn")
+		get_tree().change_scene("res://Scene/Test Level/Tesrt Level.tscn")
+		
