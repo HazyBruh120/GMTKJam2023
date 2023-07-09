@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dr8e6vsohcn0v"
+path="res://.godot/imported/Fail 3a.wav-6adafda0b9530395f04214e1299cecbb.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Fail 3a.wav"
+dest_files=["res://.godot/imported/Fail 3a.wav-6adafda0b9530395f04214e1299cecbb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

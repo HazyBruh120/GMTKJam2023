@@ -13,6 +13,7 @@ const SPEED = 150.0
 @onready var HungerBar = $CanvasLayer/UI/HungerBar
 @onready var qteTimer = $qteTimer
 @onready var delayTimer = $delayTimer
+@onready var PlayerSFX = $SFXPlayer
 
 var boostMeter:float = 1
 var hungerMeter:float = 1
@@ -90,12 +91,16 @@ func process_qte():
 		qteTimer.time_left <= qteTimer.wait_time:
 		is_hidden = false
 		qte["success"] = false
+		PlayerSFX.stream = load("res://Scene/Player/Assets/FailSound.tres")
+		PlayerSFX.play()
 	elif (qte["wantedTime"] > qteTimer.time_left-qte_range and qte["wantedTime"] < qteTimer.time_left+qte_range) and \
 		Input.is_action_just_pressed("qte") and \
 		qteTimer.time_left <= qteTimer.wait_time:
 		qteSlider.visible = false
 		valSlider.visible = false
 		qte["success"] = true
+		PlayerSFX.stream = load("res://Scene/Player/Assets/SuccessSound.tres")
+		PlayerSFX.play()
 	
 	if is_hidden and delayTimer.is_stopped() and qteTimer.is_stopped():
 		delayTimer.start()

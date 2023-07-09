@@ -1,9 +1,10 @@
-[gd_scene load_steps=40 format=3 uid="uid://yih435t43oki"]
+[gd_scene load_steps=41 format=3 uid="uid://yih435t43oki"]
 
 [ext_resource type="Script" path="res://Scene/Player/Mimic.gd" id="1_gqpi8"]
 [ext_resource type="Texture2D" uid="uid://cljb4x3brd1f8" path="res://Assets/Art/chest_mimic.png" id="2_4tsif"]
 [ext_resource type="Texture2D" uid="uid://pgxqursp1bdb" path="res://Assets/UI/Keyboard Extras.png" id="4_w581k"]
 [ext_resource type="Texture2D" uid="uid://dhoyt761ftpmt" path="res://interface/Placeholder Bar Textures/bg.png" id="5_6jtlg"]
+[ext_resource type="AudioStream" uid="uid://ce0ljar2p0q1p" path="res://Scene/Player/Assets/SuccessSound.tres" id="6_1cvxp"]
 [ext_resource type="Texture2D" uid="uid://dhd6ji23sewgm" path="res://interface/Placeholder Bar Textures/fill.png" id="6_25sxu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg6ip"]
@@ -398,6 +399,9 @@ one_shot = true
 [node name="delayTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_1cvxp")
 
 [connection signal="timeout" from="StealthTimer" to="." method="_on_stealth_timer_timeout"]
 [connection signal="timeout" from="qteTimer" to="." method="_on_qte_timer_timeout"]
