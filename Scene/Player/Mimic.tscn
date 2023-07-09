@@ -1,8 +1,9 @@
-[gd_scene load_steps=66 format=3 uid="uid://yih435t43oki"]
+[gd_scene load_steps=67 format=3 uid="uid://yih435t43oki"]
 
 [ext_resource type="Script" path="res://Scene/Player/Mimic.gd" id="1_gqpi8"]
 [ext_resource type="Texture2D" uid="uid://3qmypxkx5l3h" path="res://Scene/Player/Assets/mimic spritesheet_complete.png" id="2_qtqdg"]
 [ext_resource type="Texture2D" uid="uid://ca3i3xrrtdp0d" path="res://Assets/UI/top.png" id="4_asdet"]
+[ext_resource type="AudioStream" uid="uid://dkhk6agbl4ls4" path="res://Scene/Player/Assets/Screeching Monster 2-1.wav" id="4_bmw4c"]
 [ext_resource type="Texture2D" uid="uid://pgxqursp1bdb" path="res://Assets/UI/Keyboard Extras.png" id="4_w581k"]
 [ext_resource type="Texture2D" uid="uid://gxdlj7x0r6cn" path="res://Assets/UI/bottom.png" id="5_fnvfs"]
 [ext_resource type="AudioStream" uid="uid://ce0ljar2p0q1p" path="res://Scene/Player/Assets/SuccessSound.tres" id="6_1cvxp"]
@@ -85,10 +86,26 @@ tracks/0/keys = {
 "update": 1,
 "values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../JumpSound")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("9_bfcvi")
+}],
+"times": PackedFloat32Array(0.4)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_rngq0"]
 resource_name = "Hit"
 length = 0.3
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -101,6 +118,21 @@ tracks/0/keys = {
 "update": 1,
 "values": [Vector2i(0, 18), Vector2i(1, 18), Vector2i(2, 18), Vector2i(0, 18), Vector2i(3, 18)]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../screechSound")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_bmw4c")
+}],
+"times": PackedFloat32Array(0.25)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_itoni"]
 resource_name = "SideBite"
@@ -167,6 +199,21 @@ tracks/0/keys = {
 "update": 1,
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../JumpSound")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("9_bfcvi")
+}],
+"times": PackedFloat32Array(0.4)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_gapyf"]
 resource_name = "UpBite"
@@ -233,6 +280,21 @@ tracks/0/keys = {
 "update": 1,
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../JumpSound")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("9_bfcvi")
+}],
+"times": PackedFloat32Array(0.4)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_15qc1"]
 _data = {
@@ -452,7 +514,7 @@ position = Vector2(0, -32)
 texture = ExtResource("2_qtqdg")
 hframes = 4
 vframes = 19
-frame = 72
+frame = 75
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.321907, -3.79297)
@@ -554,7 +616,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("6_2dfp8")
 theme_override_font_sizes/font_size = 30
-text = "Satiety
+text = "Hunger
 "
 horizontal_alignment = 2
 
@@ -584,12 +646,14 @@ stream = ExtResource("7_nwisi")
 volume_db = -1.0
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_bfcvi")
 volume_db = 2.0
 bus = &"SFX"
 
 [node name="dmgSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_g1vit")
+
+[node name="screechSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_bmw4c")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="StealthTimer" to="." method="_on_stealth_timer_timeout"]
