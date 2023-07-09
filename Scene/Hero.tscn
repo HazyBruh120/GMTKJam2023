@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://duaulf744u833"]
+[gd_scene load_steps=25 format=3 uid="uid://duaulf744u833"]
 
 [ext_resource type="Script" path="res://Scene/Hero.gd" id="1_qh1js"]
 [ext_resource type="Texture2D" uid="uid://cyxt8qxwor2sp" path="res://Assets/Art/Exclamation-Mark.png" id="2_dlxni"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://c5qqs4p55x0k3" path="res://Assets/SFX/21_orc_damage_1.wav" id="11_81ncs"]
 [ext_resource type="AudioStream" uid="uid://dwn7xm4jr5jn" path="res://Assets/SFX/17_orc_atk_sword_1.wav" id="12_yl63v"]
 [ext_resource type="AudioStream" uid="uid://b3p3dya5jdwvg" path="res://Assets/SFX/69_Enemy_death_01.wav" id="13_8cdwk"]
+[ext_resource type="AudioStream" uid="uid://c06l4v7e7ek6j" path="res://Assets/SFX/Coins in Sack Dropped on Soft Surface.wav" id="14_siwqj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mh8nr"]
 radius = 5.0
@@ -257,6 +258,9 @@ stream = ExtResource("12_yl63v")
 
 [node name="PushSound" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("13_8cdwk")
+
+[node name="PickupSound" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("14_siwqj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

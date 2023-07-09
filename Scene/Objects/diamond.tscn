@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://ca3ihrw2txoki"]
+
+[ext_resource type="PackedScene" uid="uid://10e1kf74dd2k" path="res://Scene/Objects/Loot.tscn" id="1_rkn7f"]
+[ext_resource type="Texture2D" uid="uid://cal7t4b7hn8jq" path="res://Assets/Art/ore2.png" id="2_nmjo1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jwaou"]
+
+[node name="Diamond" instance=ExtResource("1_rkn7f")]
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("CircleShape2D_jwaou")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_nmjo1")
