@@ -58,6 +58,14 @@ offset_bottom = 432.0
 text = "Use the WASD keys to move 
 throught the dungeon!"
 
+[node name="TextEdit3" type="TextEdit" parent="."]
+offset_left = 539.0
+offset_top = 720.0
+offset_right = 1058.0
+offset_bottom = 791.0
+text = "Your Energy Bar on the bottom of the screen depletes over time
+You lose if the bar reaches zero"
+
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(736, 244)
 
