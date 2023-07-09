@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://yih435t43oki" path="res://Scene/Player/Mimic.tscn" id="3_s2l6s"]
 [ext_resource type="PackedScene" uid="uid://bgsvbqxkwgp4g" path="res://Scene/Objects/Coins.tscn" id="3_w4ubk"]
 [ext_resource type="PackedScene" uid="uid://duokf55usg8m8" path="res://Scene/knight.tscn" id="3_w5auj"]
-[ext_resource type="PackedScene" uid="uid://mtbryrr85cx6" path="res://Scene/wizard.tscn" id="5_owjm5"]
-[ext_resource type="PackedScene" uid="uid://nct0idux2fyo" path="res://Scene/bug.tscn" id="6_rc8jk"]
+[ext_resource type="PackedScene" path="res://Scene/wizard.tscn" id="5_owjm5"]
+[ext_resource type="PackedScene" path="res://Scene/bug.tscn" id="6_rc8jk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kydjn"]
 texture = ExtResource("1_teff4")
