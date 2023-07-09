@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal die
 
 const SPEED = 150.0
 @export var qte_range:float = 0.2
@@ -17,7 +18,6 @@ const SPEED = 150.0
 @onready var prompt = $CanvasLayer/UI/prompt
 @onready var qteTimer = $qteTimer
 @onready var delayTimer = $delayTimer
-@onready var PlayerSFX = $SFXPlayer
 
 var boostMeter:float = 1
 var hungerMeter:float = 1
@@ -53,6 +53,7 @@ func _process(delta):
 			animationTree.set("parameters/FailQTE/blend_position",input_vector)
 			particles.gravity = particles.gravity.rotated(particles.gravity.angle_to(-input_vector))
 			is_hidden = false
+			$JumpSound.play()
 			if animationState.get_current_node() != "Move" :
 				animationState.travel("Move")
 		elif animationState.get_current_node() != "Idle" :
@@ -92,6 +93,7 @@ func _physics_process(delta):
 func on_hit(dmg:float=0.2):
 	hungerMeter = clamp(hungerMeter-dmg,0,1) if !biting else clamp(hungerMeter-dmg,0,1)
 	animationState.travel("Hit")
+	$dmgSound.play()
 
 
 func biting_check()->bool:
@@ -128,6 +130,8 @@ func bite():
 func process_hunger(delta:float=0.2):
 	hungerMeter = clamp(hungerMeter-delta,0,1)
 	HungerBar.value = remap(hungerMeter,0,1,30,100)
+	if hungerMeter == 0 :
+		emit_signal("die")
 
 
 func process_qte():
@@ -140,7 +144,6 @@ func process_qte():
 			prompt.visible = false
 			qte["success"] = true
 			qte["done"] = true
-			PlayerSFX.seek(0)
 			$SuccessSound.play()
 			#play_sound("res://Scene/Player/Assets/SuccessSound.tres")
 		elif  Input.is_action_just_pressed("qte") and \
@@ -148,7 +151,6 @@ func process_qte():
 			is_hidden = false
 			qte["success"] = false
 			qte["done"] = true
-			PlayerSFX.seek(0)
 			$FailSound.play()
 			animationState.travel("FailQTE")
 			#play_sound("res://Scene/Player/Assets/FailSound.tres")
@@ -160,12 +162,6 @@ func process_qte():
 
 	qteSlider.value = qteTimer.time_left/qteTimer.wait_time*100
 
-
-#func play_sound(file):
-#	PlayerSFX.stream = null
-#	PlayerSFX.stream = load(file)
-#	PlayerSFX.seek(0)
-#	PlayerSFX.play()
 
 func abort_qte():
 	is_hidden = false
