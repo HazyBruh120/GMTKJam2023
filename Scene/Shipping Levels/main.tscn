@@ -235,14 +235,15 @@ offset_bottom = 800.0
 grow_horizontal = 2
 theme_override_font_sizes/normal_font_size = 24
 text = "Team:
-Peyton Williams - Programming and Design
+Peyton Williams (Freezybird) - Programming and Design
 Cristian Guzman - Game and Level Design
-Abdel-Gany Odedele - Programming
+Abdel-Gany Odedele (Absolute) - Programming
+Oumar Odedele- Art
 
 Additional Work:
-Alejandro Allala Guzman - Art
+Alejandro Ayala Guzman - Art
+ZirpyMoony - Title Art
 Steven Gacia - Programming consultant 
-
 
 
 Art:
@@ -254,13 +255,6 @@ Ludum Dare 28 - Track 7: (Abstraction) - http://www.abstractionmusic.com/
 Goblins_Den_(Regular) : (Leohpaz)
 Horror-story-woods: (SuloSounds)
 Winter-hip-hop-loop: (SuloSounds)
-
-
-SFX:
-
-
-
-
 "
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Credits"]
