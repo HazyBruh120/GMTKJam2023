@@ -4,6 +4,7 @@ extends CharacterBody2D
 const SPEED = 150.0
 @export var qte_range:float = 0.2
 @export var depletion_speed:float = 0.5
+@export var regen:float = 0.1
 
 @onready var animationPlayer = $AnimationPlayer
 @onready var animationTree = $AnimationTree
@@ -13,6 +14,7 @@ const SPEED = 150.0
 @onready var qteSlider = $CanvasLayer/UI/qteSlider
 @onready var valSlider = $CanvasLayer/UI/valueSlider
 @onready var HungerBar = $CanvasLayer/UI/HungerBar
+@onready var prompt = $CanvasLayer/UI/prompt
 @onready var qteTimer = $qteTimer
 @onready var delayTimer = $delayTimer
 @onready var PlayerSFX = $SFXPlayer
@@ -21,6 +23,7 @@ var boostMeter:float = 1
 var hungerMeter:float = 1
 var is_hidden:bool = false
 var to_bite = null
+var biting = false
 
 var qte = {
 	"wantedTime": randf_range(0.1,0.9), ## Randomized every qte
@@ -33,29 +36,31 @@ func _ready():
 	qte["wantedTime"] = randf_range(0.1,0.9)
 
 func _process(delta):
-	print(animationState.get_current_node())
 	$Sprite2D.modulate = Color.DIM_GRAY if is_hidden else Color.WHITE
 	process_hunger(depletion_speed/10*delta)
-	if !( biting_check() and delayTimer.is_stopped() and qteTimer.is_stopped() ):
-		process_qte()
-	else :
-		bite()
-	var input_vector = velocity.normalized()
-	
-	if input_vector != Vector2.ZERO :
-		animationTree.set("parameters/Idle/blend_position",input_vector)
-		animationTree.set("parameters/Move/blend_position",input_vector)
-		animationTree.set("parameters/Bite/blend_position",input_vector)
-		particles.gravity = particles.gravity.rotated(particles.gravity.angle_to(-input_vector))
-		is_hidden = false
-		if animationState.get_current_node() != "Move" :
-			animationState.travel("Move")
-	elif animationState.get_current_node() != "Idle" :
-		particles.emitting = false
-		animationState.travel("Idle")
-	else :
-		if !is_hidden and stealthTimer.is_stopped():
-			stealthTimer.start()
+	if animationState.get_current_node() != "Hit" :
+		if !( biting_check() ) :
+			process_qte()
+		else :
+			abort_qte()
+			bite()
+		var input_vector = velocity.normalized()
+		
+		if input_vector != Vector2.ZERO :
+			animationTree.set("parameters/Idle/blend_position",input_vector)
+			animationTree.set("parameters/Move/blend_position",input_vector)
+			animationTree.set("parameters/Bite/blend_position",input_vector)
+			animationTree.set("parameters/FailQTE/blend_position",input_vector)
+			particles.gravity = particles.gravity.rotated(particles.gravity.angle_to(-input_vector))
+			is_hidden = false
+			if animationState.get_current_node() != "Move" :
+				animationState.travel("Move")
+		elif animationState.get_current_node() != "Idle" :
+			particles.emitting = false
+			animationState.travel("Idle")
+		else :
+			if !is_hidden and stealthTimer.is_stopped():
+				stealthTimer.start()
 
 
 func _physics_process(delta):
@@ -85,27 +90,35 @@ func _physics_process(delta):
 
 
 func on_hit(dmg:float=0.2):
-	hungerMeter = clamp(hungerMeter-dmg,0,1)
+	hungerMeter = clamp(hungerMeter-dmg,0,1) if !biting else clamp(hungerMeter-dmg,0,1)
 	animationState.travel("Hit")
 
 
 func biting_check()->bool:
+	if to_bite == null or !$EatArea.get_overlapping_bodies().has(to_bite) :
+		to_bite = null
+	else:
+		return true
+	
 	for node in $EatArea.get_overlapping_bodies():
-		if node.is_in_group("hero") and node.is_biteable() and to_bite == null:
+		if node.is_in_group("hero") and node.is_biteable() and to_bite == null and is_hidden:
 			to_bite = node
 			return true
-	to_bite = null
+	
 	return false
 
 
 func bite():
-	if  animationState.get_current_node() != "Bite" and \
-		Input.is_action_just_pressed("qte") and \
+	prompt.visible = true
+	#animationState.get_current_node() != "Bite" and \
+	if  \
+		Input.is_action_pressed("qte") and \
 		to_bite != null:
 		if animationState.get_current_node() != "Bite" :
 			animationState.travel("Bite")
 		to_bite.bit()
-		to_bite == null
+		hungerMeter = clamp(hungerMeter+regen,0,1)
+		biting = true
 
 
 func process_hunger(delta:float=0.2):
@@ -120,6 +133,7 @@ func process_qte():
 			qteTimer.time_left <= qteTimer.wait_time:
 			qteSlider.visible = false
 			valSlider.visible = false
+			prompt.visible = false
 			qte["success"] = true
 			qte["done"] = true
 			PlayerSFX.seek(0)
@@ -138,10 +152,7 @@ func process_qte():
 	if is_hidden and delayTimer.is_stopped() and qteTimer.is_stopped():
 		delayTimer.start()
 	elif !is_hidden :
-		qteSlider.visible = false
-		valSlider.visible = false
-		qteTimer.stop()
-		delayTimer.stop()
+		abort_qte()
 
 	qteSlider.value = qteTimer.time_left/qteTimer.wait_time*100
 
@@ -152,6 +163,13 @@ func process_qte():
 #	PlayerSFX.seek(0)
 #	PlayerSFX.play()
 
+func abort_qte():
+	is_hidden = false
+	qteSlider.visible = false
+	valSlider.visible = false
+	prompt.visible = false
+	qteTimer.stop()
+	delayTimer.stop()
 
 func _on_stealth_timer_timeout():
 	is_hidden = true
@@ -160,6 +178,7 @@ func _on_stealth_timer_timeout():
 func _on_delay_timer_timeout():
 	qteSlider.visible = true
 	valSlider.visible = true
+	prompt.visible = true
 	qte["wantedTime"] = randf_range(0.1,qteTimer.wait_time-0.40)
 	valSlider.value = qte["wantedTime"]*100
 	qteTimer.start()
@@ -174,3 +193,13 @@ func _on_qte_timer_timeout():
 	qte["success"] = false
 	qte["done"] = false
 	delayTimer.start()
+
+
+func _on_spawn_timer_timeout():
+	pass # Replace with function body.
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name.contains("Bite") :
+		biting = false
+	pass # Replace with function body.
