@@ -44,13 +44,19 @@ func process_state_change(new_state):
 		$Music/GameplayMusic.play()
 	elif state == "win":
 		$Music/WinMusic.play()
+	elif state == "lose":
+		$Music/LoseMusic.play()
 
 
 func handle_win(state):
 	if state:
 		$NextLevel.show()
+		process_state_change("win")
 	else:
 		$RestartLevel.show()
+		process_state_change("lose")
+
+	unload_level()
 
 
 func unload_level():
@@ -86,9 +92,11 @@ func _on_quit_pressed():
 
 func _on_next_pressed():
 	$NextLevel.hide()
+	process_state_change("game")
 	next_level()
 
 
 func _on_restart_pressed():
 	$RestartLevel.hide()
+	process_state_change("game")
 	restart_level()

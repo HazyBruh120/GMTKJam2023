@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://wljqgv8wa40f"]
+[gd_scene load_steps=8 format=3 uid="uid://wljqgv8wa40f"]
 
 [ext_resource type="Script" path="res://Scene/Shipping Levels/main.gd" id="1_2k4rt"]
 [ext_resource type="AudioStream" uid="uid://chprwx1bpe3qc" path="res://Assets/Music/horror-story-woods.wav" id="2_874r1"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dqi0g02ugogdj" path="res://Assets/Music/winter-hip-hop-loop.wav" id="4_t7r4b"]
 [ext_resource type="Texture2D" uid="uid://cfb1vbu4c65t7" path="res://Assets/UI/chestpng.png" id="5_0axbm"]
 [ext_resource type="Theme" uid="uid://crqohgh136tp8" path="res://Assets/UI/theme/kenneyUI.tres" id="5_ob5wx"]
+[ext_resource type="AudioStream" uid="uid://dtdtr5iayjff3" path="res://Assets/Music/Ludum Dare 28 - Track 7.wav" id="5_qfp10"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_2k4rt")
@@ -20,6 +21,9 @@ stream = ExtResource("3_fae2a")
 
 [node name="WinMusic" type="AudioStreamPlayer2D" parent="Music"]
 stream = ExtResource("4_t7r4b")
+
+[node name="LoseMusic" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource("5_qfp10")
 
 [node name="Menu" type="Control" parent="."]
 layout_mode = 3
