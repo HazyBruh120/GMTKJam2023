@@ -643,14 +643,14 @@ offset_right = 40.0
 offset_bottom = 23.0
 theme = ExtResource("6_2dfp8")
 theme_override_font_sizes/font_size = 50
-text = "Heroes:"
+text = "Enemies:"
 
 [node name="Label" type="Label" parent="CanvasLayer/UI/Label2"]
 layout_mode = 0
-offset_left = 318.817
-offset_top = -0.681793
-offset_right = 360.817
-offset_bottom = 59.3182
+offset_left = 338.999
+offset_top = 0.159103
+offset_right = 380.999
+offset_bottom = 60.1591
 theme = ExtResource("6_2dfp8")
 theme_override_font_sizes/font_size = 50
 text = "0"
