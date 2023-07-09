@@ -47,6 +47,8 @@ func _physics_process(delta):
 
 		elif base_health == 2:
 			$HealthBar.play("health2")
+		elif base_health == 1:
+			$HealthBar.play("health2")
 
 		$HealthBar.pause()
 
@@ -194,7 +196,6 @@ func bit():
 
 func is_biteable():
 	return target_still_hidden or not $TakingDamageTimer.is_stopped()
-
 
 
 func do_damage():

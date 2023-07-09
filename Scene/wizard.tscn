@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://mtbryrr85cx6"]
+
+[ext_resource type="PackedScene" uid="uid://duaulf744u833" path="res://Scene/Hero.tscn" id="1_gg54r"]
+[ext_resource type="Texture2D" uid="uid://c432m4mdf32c4" path="res://Assets/Art/Characters-part-2.png" id="2_v6xqb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d766r"]
+atlas = ExtResource("2_v6xqb")
+region = Rect2(0, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3l7u"]
+atlas = ExtResource("2_v6xqb")
+region = Rect2(32, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4cf6"]
+atlas = ExtResource("2_v6xqb")
+region = Rect2(64, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eo1ej"]
+atlas = ExtResource("2_v6xqb")
+region = Rect2(96, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vs46"]
+atlas = ExtResource("2_v6xqb")
+region = Rect2(128, 48, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2x58l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d766r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3l7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4cf6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eo1ej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vs46")
+}],
+"loop": true,
+"name": &"horz",
+"speed": 10.0
+}]
+
+[node name="wizard" instance=ExtResource("1_gg54r")]
+base_health = 2
+will_push = true
+
+[node name="TakingDamageTimer" parent="." index="8"]
+wait_time = 0.5
+
+[node name="AnimatedSprite2D" parent="." index="9"]
+position = Vector2(2.08165e-12, -10)
+sprite_frames = SubResource("SpriteFrames_2x58l")
+animation = &"horz"
