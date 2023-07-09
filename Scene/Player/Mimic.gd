@@ -38,7 +38,7 @@ func _process(delta):
 		process_qte()
 	process_hunger(depletion_speed*delta)
 	var input_vector = velocity.normalized()
-	
+
 	if input_vector != Vector2.ZERO :
 		animationTree.set("parameters/Idle/blend_position",input_vector)
 		animationTree.set("parameters/Move/blend_position",input_vector)
@@ -137,7 +137,7 @@ func process_qte():
 		valSlider.visible = false
 		qteTimer.stop()
 		delayTimer.stop()
-	
+
 	qteSlider.value = qteTimer.time_left/qteTimer.wait_time*100
 
 

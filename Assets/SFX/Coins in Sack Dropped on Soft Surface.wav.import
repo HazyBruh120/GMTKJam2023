@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c06l4v7e7ek6j"
+path="res://.godot/imported/Coins in Sack Dropped on Soft Surface.wav-eadbd79ab8eb0e19b5d64ad89e91661e.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Coins in Sack Dropped on Soft Surface.wav"
+dest_files=["res://.godot/imported/Coins in Sack Dropped on Soft Surface.wav-eadbd79ab8eb0e19b5d64ad89e91661e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

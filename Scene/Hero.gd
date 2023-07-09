@@ -237,6 +237,7 @@ func _on_interact_area_area_entered(area):
 	var area_parent = area.get_parent()
 	if area_parent.is_in_group("loot"):
 		area_parent.queue_free()
+		$Audio/PickupSound.play()
 		target_loot = null
 		emote.play("default")
 
