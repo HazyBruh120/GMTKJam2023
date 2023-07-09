@@ -34,14 +34,17 @@ func _ready():
 
 func _process(delta):
 	$Sprite2D.modulate = Color.DIM_GRAY if is_hidden else Color.WHITE
+	process_hunger(depletion_speed*delta)
 	if !( biting_check() and delayTimer.is_stopped() and qteTimer.is_stopped() ):
 		process_qte()
-	process_hunger(depletion_speed*delta)
+	else :
+		bite()
 	var input_vector = velocity.normalized()
 
 	if input_vector != Vector2.ZERO :
 		animationTree.set("parameters/Idle/blend_position",input_vector)
 		animationTree.set("parameters/Move/blend_position",input_vector)
+		animationTree.set("parameters/Bite/blend_position",input_vector)
 		particles.gravity = particles.gravity.rotated(particles.gravity.angle_to(-input_vector))
 		is_hidden = false
 		if animationState.get_current_node() != "Move" :
@@ -52,8 +55,6 @@ func _process(delta):
 	else :
 		if !is_hidden and stealthTimer.is_stopped():
 			stealthTimer.start()
-	#	$LureArea.monitorable = Input.is_action_pressed("lure")
-		$LureArea.visible = Input.is_action_pressed("lure")
 
 
 func _physics_process(delta):
@@ -96,8 +97,10 @@ func biting_check()->bool:
 
 
 func bite():
-	animationState.travel("Bite")
-	to_bite.bit()
+	if  animationState.get_current_node() != "Bite" and \
+		Input.is_action_just_pressed("qte") :
+		animationState.travel("Bite")
+		to_bite.bit()
 
 
 func process_hunger(delta:float=0.2):
@@ -114,6 +117,7 @@ func process_qte():
 			valSlider.visible = false
 			qte["success"] = true
 			qte["done"] = true
+			PlayerSFX.seek(0)
 			$SuccessSound.play()
 			#play_sound("res://Scene/Player/Assets/SuccessSound.tres")
 		elif  Input.is_action_just_pressed("qte") and \
@@ -122,6 +126,7 @@ func process_qte():
 			animationState.travel("FailQTE")
 			qte["success"] = false
 			qte["done"] = true
+			PlayerSFX.seek(0)
 			$FailSound.play()
 			#play_sound("res://Scene/Player/Assets/FailSound.tres")
 	

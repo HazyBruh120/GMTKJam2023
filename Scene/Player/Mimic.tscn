@@ -211,6 +211,7 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_5hwwy")
 blend_point_3/pos = Vector2(0, -1.1)
 min_space = Vector2(-1, -1.1)
 max_space = Vector2(1, 1.1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1s4b5"]
 animation = &"FailQTE"
@@ -313,7 +314,7 @@ states/Move/node = SubResource("AnimationNodeBlendSpace2D_k87m4")
 states/Move/position = Vector2(592, 100)
 states/Start/position = Vector2(202, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_33cmv"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_7qga8"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_ywsei"), "Idle", "FailQTE", SubResource("AnimationNodeStateMachineTransition_5mktv"), "FailQTE", "Idle", SubResource("AnimationNodeStateMachineTransition_qp2qy"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_6w0x2"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_5xaru"), "Bite", "Idle", SubResource("AnimationNodeStateMachineTransition_goxjc"), "Idle", "Bite", SubResource("AnimationNodeStateMachineTransition_h7406")]
-graph_offset = Vector2(-209, -17)
+graph_offset = Vector2(-201, -4)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wairh"]
 bg_color = Color(0, 0.682353, 0.72549, 1)
@@ -367,7 +368,7 @@ position = Vector2(0, -32)
 texture = ExtResource("2_qtqdg")
 hframes = 4
 vframes = 19
-frame = 68
+frame = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.321907, -3.79297)
@@ -394,7 +395,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_xhgnf")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Bite/blend_position = Vector2(-0.00277627, -0.873333)
+parameters/Bite/blend_position = Vector2(-0.00218582, -1.07365)
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Move/blend_position = Vector2(0, 0)
 
