@@ -5,6 +5,7 @@ const SPEED = 150.0
 @export var qte_range:float = 0.2
 @export var depletion_speed:float = 0.1
 
+@onready var animationPlayer = $AnimationPlayer
 @onready var animationTree = $AnimationTree
 @onready var animationState = animationTree["parameters/playback"]
 @onready var particles = $CPUParticles2D
@@ -70,6 +71,7 @@ func _physics_process(delta):
 
 	if input_vector != Vector2.ZERO:
 		velocity = input_vector * SPEED
+		$Sprite2D.flip_h = input_vector.x < 0
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
 
@@ -83,7 +85,9 @@ func on_hit(dmg:float=0.2):
 
 
 func biting():
-	
+	for area in $EatArea.get_overlapping_areas():
+		if area.has_group("hero") and area.get_parent():
+			pass
 	pass
 
 
@@ -106,8 +110,10 @@ func process_qte():
 		elif  Input.is_action_just_pressed("qte") and \
 			qteTimer.time_left <= qteTimer.wait_time:
 			is_hidden = false
+			animationState.travel("FailCheck")
 			qte["success"] = false
 			qte["done"] = true
+			
 			play_sound("res://Scene/Player/Assets/FailSound.tres")
 	
 	if is_hidden and delayTimer.is_stopped() and qteTimer.is_stopped():
@@ -130,6 +136,7 @@ func play_sound(file):
 
 func _on_stealth_timer_timeout():
 	is_hidden = true
+	
 
 
 func _on_delay_timer_timeout():
