@@ -501,6 +501,8 @@ border_width_right = 34
 y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_gqpi8")
+depletion_speed = 0.25
+regen = 0.2
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(0, -10)
@@ -619,6 +621,11 @@ theme = ExtResource("6_2dfp8")
 theme_override_font_sizes/font_size = 30
 text = "energy"
 horizontal_alignment = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)

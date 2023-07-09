@@ -112,6 +112,7 @@ func biting_check()->bool:
 
 func push(vector:Vector2):
 	velocity = vector
+	print(vector)
 
 
 func bite():
