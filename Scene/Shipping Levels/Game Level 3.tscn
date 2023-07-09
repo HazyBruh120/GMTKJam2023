@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bs58ashnebyq8"]
+[gd_scene load_steps=11 format=3 uid="uid://bs58ashnebyq8"]
 
 [ext_resource type="Script" path="res://Scene/Shipping Levels/LevelLogic.gd" id="1_63o3f"]
 [ext_resource type="PackedScene" uid="uid://mkcft8bq1n8o" path="res://Scene/Objects/tile_map.tscn" id="2_j4v4r"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://nct0idux2fyo" path="res://Scene/bug.tscn" id="5_lsat4"]
 [ext_resource type="PackedScene" uid="uid://duokf55usg8m8" path="res://Scene/knight.tscn" id="6_xe2yn"]
 [ext_resource type="PackedScene" uid="uid://bgsvbqxkwgp4g" path="res://Scene/Objects/Coins.tscn" id="7_cfxta"]
+[ext_resource type="PackedScene" uid="uid://mtbryrr85cx6" path="res://Scene/wizard.tscn" id="7_y80jc"]
 [ext_resource type="PackedScene" path="res://Scene/Objects/emerald.tscn" id="8_sep6l"]
 [ext_resource type="PackedScene" path="res://Scene/Objects/diamond.tscn" id="9_aomqp"]
 
@@ -36,19 +37,22 @@ texture = ExtResource("4_ggegu")
 [node name="Mobs" type="Node2D" parent="."]
 
 [node name="bug" parent="Mobs" instance=ExtResource("5_lsat4")]
-position = Vector2(893, 2294)
+position = Vector2(1249, 230)
 
 [node name="bug2" parent="Mobs" instance=ExtResource("5_lsat4")]
-position = Vector2(1405, 2717)
-
-[node name="bug3" parent="Mobs" instance=ExtResource("5_lsat4")]
-position = Vector2(45, 2186)
+position = Vector2(1193, 1245)
 
 [node name="Knight" parent="Mobs" instance=ExtResource("6_xe2yn")]
-position = Vector2(448, 3053)
+position = Vector2(1288, 605)
 
 [node name="Knight2" parent="Mobs" instance=ExtResource("6_xe2yn")]
-position = Vector2(800, 3051)
+position = Vector2(1348, 827)
+
+[node name="wizard" parent="Mobs" instance=ExtResource("7_y80jc")]
+position = Vector2(903, 324)
+
+[node name="wizard2" parent="Mobs" instance=ExtResource("7_y80jc")]
+position = Vector2(875, 1112)
 
 [node name="Coins" parent="." instance=ExtResource("7_cfxta")]
 position = Vector2(445, 784)
