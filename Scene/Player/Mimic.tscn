@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://yih435t43oki"]
+[gd_scene load_steps=68 format=3 uid="uid://yih435t43oki"]
 
 [ext_resource type="Script" path="res://Scene/Player/Mimic.gd" id="1_gqpi8"]
 [ext_resource type="Texture2D" uid="uid://3qmypxkx5l3h" path="res://Scene/Player/Assets/mimic spritesheet_complete.png" id="2_qtqdg"]
@@ -10,6 +10,7 @@
 [ext_resource type="Theme" uid="uid://crqohgh136tp8" path="res://Assets/UI/theme/kenneyUI.tres" id="6_2dfp8"]
 [ext_resource type="AudioStream" uid="uid://h8pd1tybisv6" path="res://Scene/Player/Assets/FailSound.tres" id="7_nwisi"]
 [ext_resource type="AudioStream" uid="uid://cs3i4j8281kcl" path="res://Scene/Player/Assets/FOOTSTEP - Metal Plate Jump Barefoot Male - 17_loop.wav" id="9_bfcvi"]
+[ext_resource type="Script" path="res://Scene/Player/Label.gd" id="9_mtgjl"]
 [ext_resource type="AudioStream" uid="uid://cbda1ulxxso1l" path="res://Scene/Player/Assets/Alien_Damage_1__calicrazed.com.wav" id="10_g1vit"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rurfx"]
@@ -501,8 +502,7 @@ border_width_right = 34
 y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_gqpi8")
-depletion_speed = 0.25
-regen = 0.2
+depletion_speed = 0.2
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(0, -10)
@@ -516,7 +516,7 @@ position = Vector2(0, -32)
 texture = ExtResource("2_qtqdg")
 hframes = 4
 vframes = 19
-frame = 75
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.321907, -3.79297)
@@ -623,9 +623,37 @@ text = "energy"
 horizontal_alignment = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_right = 40.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme = ExtResource("6_2dfp8")
+theme_override_font_sizes/font_size = 40
+text = "Munch!"
+
+[node name="Label2" type="Label" parent="CanvasLayer/UI"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+theme = ExtResource("6_2dfp8")
+theme_override_font_sizes/font_size = 50
+text = "Heroes:"
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/Label2"]
+layout_mode = 0
+offset_left = 318.817
+offset_top = -0.681793
+offset_right = 360.817
+offset_bottom = 59.3182
+theme = ExtResource("6_2dfp8")
+theme_override_font_sizes/font_size = 50
+text = "0"
+script = ExtResource("9_mtgjl")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)

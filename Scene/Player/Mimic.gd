@@ -6,6 +6,7 @@ const SPEED = 150.0
 @export var qte_range:float = 0.2
 @export var depletion_speed:float = 0.5
 @export var regen:float = 0.1
+@export var boost_rate:float = 1.5
 
 @onready var animationPlayer = $AnimationPlayer
 @onready var animationTree = $AnimationTree
@@ -15,6 +16,7 @@ const SPEED = 150.0
 @onready var qteSlider = $CanvasLayer/UI/qteSlider
 @onready var valSlider = $CanvasLayer/UI/valueSlider
 @onready var HungerBar = $CanvasLayer/UI/HungerBar
+@onready var munchText = $CanvasLayer/UI/Label
 @onready var prompt = $CanvasLayer/UI/prompt
 @onready var qteTimer = $qteTimer
 @onready var delayTimer = $delayTimer
@@ -32,14 +34,16 @@ var qte = {
 	}
 
 func _ready():
+	depletion_speed /= 10
 	animationTree.active = true
 	qte["wantedTime"] = randf_range(0.1,0.9)
 
 func _process(delta):
 	$Sprite2D.modulate = Color.DIM_GRAY if is_hidden else Color.WHITE
-	process_hunger(depletion_speed/10*delta)
+	process_hunger(depletion_speed*delta)
 	if animationState.get_current_node() != "Hit" :
 		if !biting_check() :
+			munchText.visible = false
 			process_qte()
 		else :
 			abort_qte()
@@ -67,7 +71,7 @@ func _physics_process(delta):
 	var input_vector = Input.get_vector("game_left", "game_right","game_up", "game_down")
 	if Input.is_action_pressed("boost") and input_vector != Vector2.ZERO:
 		if boostMeter > 0.0 :
-			process_hunger(depletion_speed/10*delta)
+			process_hunger(depletion_speed*boost_rate*delta)
 			input_vector *= 1.5
 			boostMeter -= delta
 			particles.emitting = true
@@ -91,6 +95,7 @@ func _physics_process(delta):
 
 func on_hit(dmg:float=0.2):
 	hungerMeter = clamp(hungerMeter-dmg,0,1) if !biting else clamp(hungerMeter-dmg,0,1)
+	is_hidden = false
 	animationState.travel("Hit")
 	if !$dmgSound.playing :
 		$dmgSound.play()
@@ -117,6 +122,7 @@ func push(vector:Vector2):
 
 func bite():
 	prompt.visible = true
+	munchText.visible = true
 	#animationState.get_current_node() != "Bite" and \
 	if  \
 		Input.is_action_pressed("qte") and \
@@ -191,9 +197,7 @@ func _on_qte_timer_timeout():
 	if !qte["success"] :
 		if !$FailSound.playing :
 			$FailSound.play()
-		else:
-			$FailSound.stop()
-			$FailSound.play()
+		
 		animationState.travel("FailQTE")
 	is_hidden = qte["success"]
 	qte["success"] = false
