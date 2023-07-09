@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://yih435t43oki"]
+[gd_scene load_steps=63 format=3 uid="uid://yih435t43oki"]
 
 [ext_resource type="Script" path="res://Scene/Player/Mimic.gd" id="1_gqpi8"]
 [ext_resource type="Texture2D" uid="uid://3qmypxkx5l3h" path="res://Scene/Player/Assets/mimic spritesheet_complete.png" id="2_qtqdg"]
@@ -67,11 +67,21 @@ tracks/0/keys = {
 "values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
 }
 
-[sub_resource type="Animation" id="Animation_v7vvd"]
-resource_name = "FailQTE"
-
 [sub_resource type="Animation" id="Animation_rngq0"]
 resource_name = "Hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0499388, 0.100321, 0.199755, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 18), Vector2i(1, 18), Vector2i(2, 18), Vector2i(0, 18), Vector2i(3, 18)]
+}
 
 [sub_resource type="Animation" id="Animation_itoni"]
 resource_name = "SideBite"
@@ -173,17 +183,67 @@ tracks/0/keys = {
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_5ia3m"]
+resource_name = "SideFailQTE"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 10), Vector2i(1, 10), Vector2i(2, 10), Vector2i(3, 10), Vector2i(0, 12), Vector2i(1, 12), Vector2i(2, 12), Vector2i(3, 12)]
+}
+
+[sub_resource type="Animation" id="Animation_vul5q"]
+resource_name = "UpFailQTE"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 9), Vector2i(1, 9), Vector2i(2, 9), Vector2i(3, 9), Vector2i(0, 13), Vector2i(1, 13), Vector2i(2, 13), Vector2i(3, 13)]
+}
+
+[sub_resource type="Animation" id="Animation_ol3jh"]
+resource_name = "DownFailQTE"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 11), Vector2i(1, 11), Vector2i(2, 11), Vector2i(3, 11), Vector2i(0, 14), Vector2i(1, 14), Vector2i(2, 14), Vector2i(3, 14)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_15qc1"]
 _data = {
 "DownBite": SubResource("Animation_4rqpv"),
+"DownFailQTE": SubResource("Animation_ol3jh"),
 "DownIdle": SubResource("Animation_ym8dx"),
 "DownMove": SubResource("Animation_5tgiv"),
-"FailQTE": SubResource("Animation_v7vvd"),
 "Hit": SubResource("Animation_rngq0"),
 "SideBite": SubResource("Animation_itoni"),
+"SideFailQTE": SubResource("Animation_5ia3m"),
 "SideIdle": SubResource("Animation_8tu1w"),
 "SideMove": SubResource("Animation_udql1"),
 "UpBite": SubResource("Animation_gapyf"),
+"UpFailQTE": SubResource("Animation_vul5q"),
 "UpIdle": SubResource("Animation_ehn7b"),
 "UpMove": SubResource("Animation_mx7yd")
 }
@@ -211,9 +271,32 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_5hwwy")
 blend_point_3/pos = Vector2(0, -1.1)
 min_space = Vector2(-1, -1.1)
 max_space = Vector2(1, 1.1)
+blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1s4b5"]
-animation = &"FailQTE"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a3gq0"]
+animation = &"DownFailQTE"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_22i3a"]
+animation = &"UpFailQTE"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4takg"]
+animation = &"SideFailQTE"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gggt6"]
+animation = &"SideFailQTE"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_u4vha"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_a3gq0")
+blend_point_0/pos = Vector2(0, 1.1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_22i3a")
+blend_point_1/pos = Vector2(0, -1.1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_4takg")
+blend_point_2/pos = Vector2(-1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_gggt6")
+blend_point_3/pos = Vector2(1, 0)
+min_space = Vector2(-1, -1.1)
+max_space = Vector2(1, 1.1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y14i1"]
 animation = &"Hit"
@@ -279,13 +362,7 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ywsei"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5mktv"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qp2qy"]
-switch_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6w0x2"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5xaru"]
 switch_mode = 2
@@ -296,6 +373,11 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h7406"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ktcd"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wl3hd"]
+switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xhgnf"]
@@ -303,8 +385,8 @@ allow_transition_to_self = true
 states/Bite/node = SubResource("AnimationNodeBlendSpace2D_6rlns")
 states/Bite/position = Vector2(417, 1)
 states/End/position = Vector2(884, 100)
-states/FailQTE/node = SubResource("AnimationNodeAnimation_1s4b5")
-states/FailQTE/position = Vector2(417, 204)
+states/FailQTE/node = SubResource("AnimationNodeBlendSpace2D_u4vha")
+states/FailQTE/position = Vector2(418, 218)
 states/Hit/node = SubResource("AnimationNodeAnimation_y14i1")
 states/Hit/position = Vector2(592, 1)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_0803q")
@@ -312,20 +394,8 @@ states/Idle/position = Vector2(417, 100)
 states/Move/node = SubResource("AnimationNodeBlendSpace2D_k87m4")
 states/Move/position = Vector2(592, 100)
 states/Start/position = Vector2(202, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_33cmv"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_7qga8"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_ywsei"), "Idle", "FailQTE", SubResource("AnimationNodeStateMachineTransition_5mktv"), "FailQTE", "Idle", SubResource("AnimationNodeStateMachineTransition_qp2qy"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_6w0x2"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_5xaru"), "Bite", "Idle", SubResource("AnimationNodeStateMachineTransition_goxjc"), "Idle", "Bite", SubResource("AnimationNodeStateMachineTransition_h7406")]
-graph_offset = Vector2(-209, -17)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wairh"]
-bg_color = Color(0, 0.682353, 0.72549, 1)
-border_width_left = 34
-border_width_right = 34
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8sq5i"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4mom"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 34
-border_width_right = 34
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_33cmv"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_7qga8"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_ywsei"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_6w0x2"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_5xaru"), "Bite", "Idle", SubResource("AnimationNodeStateMachineTransition_goxjc"), "Idle", "Bite", SubResource("AnimationNodeStateMachineTransition_h7406"), "Idle", "FailQTE", SubResource("AnimationNodeStateMachineTransition_5ktcd"), "FailQTE", "Idle", SubResource("AnimationNodeStateMachineTransition_wl3hd")]
+graph_offset = Vector2(-300, 71)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_llx7r"]
 atlas = ExtResource("4_w581k")
@@ -349,6 +419,18 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wairh"]
+bg_color = Color(0, 0.682353, 0.72549, 1)
+border_width_left = 34
+border_width_right = 34
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8sq5i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4mom"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 34
+border_width_right = 34
+
 [node name="Mimic" type="CharacterBody2D" groups=["mimic"]]
 y_sort_enabled = true
 motion_mode = 1
@@ -367,7 +449,7 @@ position = Vector2(0, -32)
 texture = ExtResource("2_qtqdg")
 hframes = 4
 vframes = 19
-frame = 68
+frame = 59
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.321907, -3.79297)
@@ -394,7 +476,8 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_xhgnf")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Bite/blend_position = Vector2(-0.00277627, -0.873333)
+parameters/Bite/blend_position = Vector2(-0.00218582, -1.07365)
+parameters/FailQTE/blend_position = Vector2(0, 0)
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Move/blend_position = Vector2(0, 0)
 
@@ -405,6 +488,13 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
+
+[node name="prompt" type="AnimatedSprite2D" parent="CanvasLayer/UI"]
+position = Vector2(961.542, 131.853)
+scale = Vector2(7.90446, 7.90446)
+sprite_frames = SubResource("SpriteFrames_ww8x3")
+autoplay = "default"
+frame_progress = 0.142934
 
 [node name="valueSlider" type="HScrollBar" parent="CanvasLayer/UI"]
 modulate = Color(0.878431, 0.45098, 0, 1)
@@ -431,13 +521,6 @@ grow_horizontal = 2
 theme_override_styles/scroll = SubResource("StyleBoxEmpty_8sq5i")
 theme_override_styles/grabber = SubResource("StyleBoxFlat_f4mom")
 value = 5.0
-
-[node name="prompt" type="AnimatedSprite2D" parent="CanvasLayer/UI/qteSlider"]
-position = Vector2(338.542, 131.853)
-scale = Vector2(7.90446, 7.90446)
-sprite_frames = SubResource("SpriteFrames_ww8x3")
-autoplay = "default"
-frame_progress = 0.142934
 
 [node name="HungerBar" type="TextureProgressBar" parent="CanvasLayer/UI"]
 layout_mode = 1
@@ -494,6 +577,7 @@ stream = ExtResource("7_nwisi")
 visible = false
 stream = ExtResource("6_1cvxp")
 
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="StealthTimer" to="." method="_on_stealth_timer_timeout"]
 [connection signal="timeout" from="qteTimer" to="." method="_on_qte_timer_timeout"]
 [connection signal="timeout" from="delayTimer" to="." method="_on_delay_timer_timeout"]
