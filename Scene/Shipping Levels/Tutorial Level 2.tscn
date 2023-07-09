@@ -62,7 +62,21 @@ offset_bottom = 508.0
 text = "Staying still puts the player
 in Disguise mode "
 
+[node name="TextEdit4" type="TextEdit" parent="."]
+offset_left = 1120.0
+offset_top = 14.0
+offset_right = 1380.0
+offset_bottom = 51.0
+text = "Eating creatures fill energy bar"
+
+[node name="TextEdit5" type="TextEdit" parent="."]
+offset_left = 1120.0
+offset_top = 123.0
+offset_right = 1385.0
+offset_bottom = 162.0
+text = "Getting hit depletes energy bar"
+
 [node name="Mobs" type="Node2D" parent="."]
 
 [node name="bug" parent="Mobs" instance=ExtResource("4_3nseo")]
-position = Vector2(1217, 381)
+position = Vector2(1230, 337)
