@@ -50,6 +50,9 @@ animations = [{
 base_health = 2
 will_push = true
 
+[node name="EmoteSprite" parent="." index="4"]
+modulate = Color(1, 1, 1, 0.8)
+
 [node name="TakingDamageTimer" parent="." index="8"]
 wait_time = 0.5
 
@@ -57,3 +60,6 @@ wait_time = 0.5
 position = Vector2(2.08165e-12, -10)
 sprite_frames = SubResource("SpriteFrames_2x58l")
 animation = &"horz"
+
+[node name="HealthBar" parent="." index="10"]
+modulate = Color(1, 1, 1, 0.8)

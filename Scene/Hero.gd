@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var emote = $EmoteSprite
 @onready var take_damage_timer = $TakingDamageTimer
 @onready var anim_sprite = $AnimatedSprite2D
+@onready var anim_player = $AnimationPlayer
 
 @export var speed: float = 100.0
 @export var base_health: int = 5
@@ -17,6 +18,7 @@ extends CharacterBody2D
 var target_loot: Area2D = null
 var has_move_target = false
 var target_still_hidden = true
+var dying = false
 
 var random = null
 
@@ -37,6 +39,9 @@ func _init():
 
 
 func _physics_process(delta):
+	if dying:
+		return
+
 	if (is_first_move):
 		is_first_move = false
 		has_move_target = true
@@ -181,14 +186,20 @@ func calc_velocity():
 
 
 func bit():
+	if dying:
+		return
+
 	if $TakingDamageTimer.is_stopped():
 		$TakingDamageTimer.start()
 
 	health -= 1
 	if health <= 0:
-		queue_free()
+		anim_player.play("death")
+		dying = true
 
-		$HealthBar.frame = base_health - health
+	$Audio/HitSound.play()
+	anim_player.play("hit")
+	$HealthBar.frame = base_health - health
 
 
 	if will_push:
@@ -205,6 +216,7 @@ func do_damage():
 				if $AttackTimer.is_stopped():
 					target_still_hidden = false
 					body.on_hit()
+					$Audio/AttackSound.play()
 					$AttackTimer.start()
 
 				break
@@ -217,6 +229,7 @@ func do_push():
 				var dir = body.global_position - global_position
 				dir = dir.normalized()
 				body.push(dir)
+				$Audio/PushSound.play()
 				break
 
 
@@ -235,4 +248,11 @@ func _on_question_timer_timeout():
 
 
 func _on_taking_damage_timer_timeout():
+	if dying:
+		return
 	do_damage()
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "death":
+		queue_free()
