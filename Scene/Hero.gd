@@ -215,8 +215,8 @@ func do_damage():
 
 
 func do_push():
-	if $HitArea.has_overlapping_bodies():
-		for body in $HitArea.get_overlapping_bodies():
+	if $PushArea.has_overlapping_bodies():
+		for body in $PushArea.get_overlapping_bodies():
 			if body.is_in_group("mimic"):
 				var dir = body.global_position - global_position
 				dir = dir.normalized()

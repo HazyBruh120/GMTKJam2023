@@ -61,6 +61,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kntck"]
+radius = 23.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gm8oc"]
 animations = [{
@@ -230,6 +231,12 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
 shape = SubResource("CircleShape2D_kntck")
 
+[node name="PushArea" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea"]
+shape = SubResource("CircleShape2D_kntck")
+
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
 
@@ -269,6 +276,6 @@ libraries = {
 [connection signal="area_entered" from="InteractArea" to="." method="_on_interact_area_area_entered"]
 [connection signal="timeout" from="QuestionTimer" to="." method="_on_question_timer_timeout"]
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
-[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="body_entered" from="PushArea" to="." method="_on_hit_area_body_entered"]
 [connection signal="timeout" from="TakingDamageTimer" to="." method="_on_taking_damage_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
