@@ -1,16 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdh4c8yiykbs"]
+[gd_scene load_steps=7 format=3 uid="uid://bdh4c8yiykbs"]
 
+[ext_resource type="Script" path="res://Scene/Shipping Levels/LevelLogic.gd" id="1_ixesx"]
 [ext_resource type="PackedScene" uid="uid://mkcft8bq1n8o" path="res://Scene/Objects/tile_map.tscn" id="1_kv5wu"]
 [ext_resource type="PackedScene" uid="uid://yih435t43oki" path="res://Scene/Player/Mimic.tscn" id="2_8heh3"]
 [ext_resource type="Texture2D" uid="uid://dip1gbdq0ksgg" path="res://icon.svg" id="3_xmyyu"]
 [ext_resource type="PackedScene" uid="uid://nct0idux2fyo" path="res://Scene/bug.tscn" id="4_3nseo"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_gyuld"]
-vertices = PackedVector2Array(567, 261, 661, 260, 785, 259, 785, 355, 835, 422, 932, 147, 929, 630, 834, 579, 834, 353, 834, 212, 290, 625, 659, 580, 292, 145, 659, 211, 565, 209, 787, 421, 388, 206, 389, 353, 388, 418, 659, 532, 564, 532, 435, 418, 435, 353, 438, 260, 563, 578, 388, 579, 787, 530, 436, 530)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(5, 4, 8, 9), PackedInt32Array(7, 6, 10, 11), PackedInt32Array(12, 5, 9, 13, 14), PackedInt32Array(8, 4, 15, 3), PackedInt32Array(13, 1, 0, 14), PackedInt32Array(12, 14, 16), PackedInt32Array(10, 12, 16, 17, 18), PackedInt32Array(0, 19, 11, 20, 21, 22, 23), PackedInt32Array(24, 20, 11), PackedInt32Array(24, 11, 10, 25), PackedInt32Array(15, 26, 19, 0, 3), PackedInt32Array(20, 27, 21), PackedInt32Array(17, 22, 21, 18), PackedInt32Array(10, 18, 25)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(292, 145, 290, 625, 929, 630, 932, 147), PackedVector2Array(388, 206, 389, 353, 435, 353, 438, 260, 567, 261, 565, 209), PackedVector2Array(661, 260, 785, 259, 785, 355, 834, 353, 834, 212, 659, 211), PackedVector2Array(659, 580, 834, 579, 835, 422, 787, 421, 787, 530, 659, 532), PackedVector2Array(563, 578, 388, 579, 388, 418, 435, 418, 436, 530, 564, 532)])
+vertices = PackedVector2Array(563, 258, 665, 255, 785, 259, 785, 355, 835, 422, 932, 147, 929, 630, 834, 579, 834, 353, 830, 201, 290, 625, 660, 579, 562, 578, 388, 579, 292, 145, 664, 199, 563, 197, 388, 418, 787, 421, 389, 197, 389, 353, 435, 418, 435, 353, 560, 517, 435, 518, 662, 518, 785, 516, 438, 260)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 5, 4), PackedInt32Array(5, 8, 9), PackedInt32Array(7, 6, 10, 11), PackedInt32Array(12, 11, 10, 13), PackedInt32Array(14, 5, 9, 15, 16), PackedInt32Array(13, 10, 14, 17), PackedInt32Array(8, 4, 18, 3), PackedInt32Array(1, 0, 16, 15), PackedInt32Array(14, 16, 19), PackedInt32Array(17, 14, 19, 20), PackedInt32Array(21, 17, 20, 22), PackedInt32Array(23, 24, 21, 0), PackedInt32Array(25, 11, 12, 23, 0), PackedInt32Array(18, 26, 25, 0, 3), PackedInt32Array(22, 27, 0, 21)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(292, 145, 290, 625, 929, 630, 932, 147), PackedVector2Array(389, 197, 389, 353, 435, 353, 438, 260, 563, 258, 563, 197), PackedVector2Array(665, 255, 785, 259, 785, 355, 834, 353, 830, 201, 664, 199), PackedVector2Array(660, 579, 834, 579, 835, 422, 787, 421, 785, 516, 662, 518), PackedVector2Array(562, 578, 388, 579, 388, 418, 435, 418, 435, 518, 560, 517)])
 
 [node name="Tutorial Level 2" type="Node2D"]
+script = ExtResource("1_ixesx")
 metadata/_edit_horizontal_guides_ = []
 
 [node name="TileMap" parent="." instance=ExtResource("1_kv5wu")]
@@ -41,19 +43,16 @@ offset_left = 263.0
 offset_top = 140.0
 offset_right = 502.0
 offset_bottom = 206.0
-text = "Press Space Bar at the rigth
+text = "Press Space Bar at the right
  time to stay in Disgusie"
-
-[node name="bug" parent="." instance=ExtResource("4_3nseo")]
-position = Vector2(1164, 359)
 
 [node name="TextEdit2" type="TextEdit" parent="."]
 offset_left = 662.0
 offset_top = 1.0
 offset_right = 995.0
 offset_bottom = 63.0
-text = "When in range press Space Bar to Bite 
-Creatures"
+text = "When disguised, press Space Bar 
+to Bite nearby creatures"
 
 [node name="TextEdit3" type="TextEdit" parent="."]
 offset_left = 277.0
@@ -62,3 +61,8 @@ offset_right = 509.0
 offset_bottom = 508.0
 text = "Staying still puts the player
 in Disguise mode "
+
+[node name="Mobs" type="Node2D" parent="."]
+
+[node name="bug" parent="Mobs" instance=ExtResource("4_3nseo")]
+position = Vector2(1164, 359)
