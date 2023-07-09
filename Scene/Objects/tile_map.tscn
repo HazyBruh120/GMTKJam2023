@@ -187,7 +187,7 @@ texture_region_size = Vector2i(32, 32)
 1:6/0/y_sort_origin = 14
 1:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:6/0/physics_layer_0/angular_velocity = 0.0
-1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16.1475, 11.1362, 15.7021, 11.359, 15.7021, 16.2589, -15.9248, 16.2589)
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16.375, -16, 16.2193, -15.9099, 16.3459, 15.9951, -15.9805, 15.9248)
 4:6/0 = 0
 4:6/0/y_sort_origin = 13
 4:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -963,5 +963,6 @@ sources/2 = SubResource("TileSetAtlasSource_ikhun")
 [node name="TileMap" type="TileMap"]
 y_sort_enabled = true
 tile_set = SubResource("TileSet_0dlqj")
+cell_quadrant_size = 32
 format = 2
 layer_0/tile_data = PackedInt32Array(65535, 262144, 0, 0, 327680, 0)

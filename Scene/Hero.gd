@@ -1,18 +1,27 @@
 extends CharacterBody2D
 
-const SPEED = 100.0
+
 
 @onready var scanner = $DetectionArea
 @onready var nav_agent = $NavigationAgent2D
 @onready var emote = $EmoteSprite
+@onready var take_damage_timer = $TakingDamageTimer
+@onready var anim_sprite = $AnimatedSprite2D
+@onready var anim_player = $AnimationPlayer
 
-@export var health: int = 5
+@export var speed: float = 100.0
+@export var base_health: int = 5
+@export var will_push: bool = false
+
+@onready var health = base_health
 
 var target_loot: Area2D = null
 var has_move_target = false
 var target_still_hidden = true
+var dying = false
 
 var random = null
+
 
 var is_first_move = true
 
@@ -24,11 +33,29 @@ func _init():
 	print(random)
 	random.randomize()
 
+
+
+
+
+
 func _physics_process(delta):
+	if dying:
+		return
+
 	if (is_first_move):
 		is_first_move = false
 		has_move_target = true
 		nav_agent.target_position = global_transform.origin + Vector2.DOWN * 15
+
+		if base_health == 5:
+			$HealthBar.play("health5")
+
+		elif base_health == 2:
+			$HealthBar.play("health2")
+		elif base_health == 1:
+			$HealthBar.play("health2")
+
+		$HealthBar.pause()
 
 
 	if not is_instance_valid(target_loot):
@@ -76,7 +103,6 @@ func _physics_process(delta):
 				if target_loot == null or position.distance_to(loot.position) < position.distance_to(target_loot.position):
 
 					target_loot = loot
-
 
 		if target_loot != null:
 			has_move_target = false
@@ -129,30 +155,82 @@ func _physics_process(delta):
 			# print(nav_agent.distance_to_target())
 			calc_velocity()
 
-	if $HitArea.has_overlapping_bodies():
-		for body in $HitArea.get_overlapping_bodies():
-			if body.is_in_group("mimic"):
-				if $AttackTimer.is_stopped():
-					target_still_hidden = false
-					$AttackTimer.start()
-
-				break
-
-
+	do_damage()
 
 	move_and_slide()
 
 
 func calc_velocity():
-	var next_pos: Vector2 = nav_agent.get_next_path_position()
 
-	velocity = (next_pos - position).normalized() * SPEED
+	if not $TakingDamageTimer.is_stopped():
+		velocity = Vector2.ZERO
+		return
+
+	var next_pos: Vector2 = nav_agent.get_next_path_position()
+	velocity = (next_pos - position).normalized() * speed
+
+	var dir = velocity.normalized()
+	anim_sprite.flip_h = false
+
+	#if abs(dir.y) > abs(dir.x): #up/down
+	#	if dir.y < 0: #up
+	#		anim_sprite.play("up")
+	#	else: #down
+	#		anim_sprite.play("down")
+	#else: #horz
+	if (dir.x < 0): #left
+		anim_sprite.play("horz")
+		anim_sprite.flip_h = true
+	else: #right
+		anim_sprite.play("horz")
 
 
 func bit():
+	if dying:
+		return
+
+	if $TakingDamageTimer.is_stopped():
+		$TakingDamageTimer.start()
+
 	health -= 1
 	if health <= 0:
-		queue_free()
+		anim_player.play("death")
+		dying = true
+
+	$Audio/HitSound.play()
+	anim_player.play("hit")
+	$HealthBar.frame = base_health - health
+
+
+	if will_push:
+		do_push()
+
+func is_biteable():
+	return target_still_hidden or not $TakingDamageTimer.is_stopped()
+
+
+func do_damage():
+	if $HitArea.has_overlapping_bodies():
+		for body in $HitArea.get_overlapping_bodies():
+			if body.is_in_group("mimic"):
+				if $AttackTimer.is_stopped():
+					target_still_hidden = false
+					body.on_hit()
+					$Audio/AttackSound.play()
+					$AttackTimer.start()
+
+				break
+
+
+func do_push():
+	if $HitArea.has_overlapping_bodies():
+		for body in $HitArea.get_overlapping_bodies():
+			if body.is_in_group("mimic"):
+				var dir = body.global_position - global_position
+				dir = dir.normalized()
+				body.push(dir)
+				$Audio/PushSound.play()
+				break
 
 
 func _on_interact_area_area_entered(area):
@@ -163,9 +241,18 @@ func _on_interact_area_area_entered(area):
 		emote.play("default")
 
 
-
 func _on_question_timer_timeout():
 	if emote.animation == "missing":
 		emote.play("default")
 	target_still_hidden = true
 
+
+func _on_taking_damage_timer_timeout():
+	if dying:
+		return
+	do_damage()
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "death":
+		queue_free()

@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://nct0idux2fyo"]
+
+[ext_resource type="PackedScene" uid="uid://duaulf744u833" path="res://Scene/Hero.tscn" id="1_xmnc5"]
+[ext_resource type="Texture2D" uid="uid://c432m4mdf32c4" path="res://Assets/Art/Characters-part-2.png" id="2_uan7c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1r5kb"]
+atlas = ExtResource("2_uan7c")
+region = Rect2(0, 192, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kea56"]
+atlas = ExtResource("2_uan7c")
+region = Rect2(32, 192, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgvy2"]
+atlas = ExtResource("2_uan7c")
+region = Rect2(64, 192, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32ymr"]
+atlas = ExtResource("2_uan7c")
+region = Rect2(96, 192, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ii5b"]
+atlas = ExtResource("2_uan7c")
+region = Rect2(128, 192, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f7bne"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1r5kb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kea56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgvy2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32ymr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ii5b")
+}],
+"loop": true,
+"name": &"horz",
+"speed": 10.0
+}]
+
+[node name="bug" instance=ExtResource("1_xmnc5")]
+base_health = 1
+
+[node name="AnimatedSprite2D" parent="." index="9"]
+position = Vector2(2.08165e-12, -11)
+sprite_frames = SubResource("SpriteFrames_f7bne")
+animation = &"horz"
