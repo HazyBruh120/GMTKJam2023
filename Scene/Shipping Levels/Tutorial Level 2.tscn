@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdh4c8yiykbs"]
+[gd_scene load_steps=10 format=3 uid="uid://bdh4c8yiykbs"]
 
 [ext_resource type="Script" path="res://Scene/Shipping Levels/LevelLogic.gd" id="1_ixesx"]
 [ext_resource type="PackedScene" uid="uid://mkcft8bq1n8o" path="res://Scene/Objects/tile_map.tscn" id="1_kv5wu"]
 [ext_resource type="PackedScene" uid="uid://yih435t43oki" path="res://Scene/Player/Mimic.tscn" id="2_8heh3"]
 [ext_resource type="Texture2D" uid="uid://dip1gbdq0ksgg" path="res://icon.svg" id="3_xmyyu"]
 [ext_resource type="PackedScene" uid="uid://nct0idux2fyo" path="res://Scene/bug.tscn" id="4_3nseo"]
+[ext_resource type="PackedScene" path="res://Scene/Objects/diamond.tscn" id="6_qdr5w"]
+[ext_resource type="PackedScene" path="res://Scene/Objects/emerald.tscn" id="7_l1a2t"]
+[ext_resource type="PackedScene" uid="uid://bgsvbqxkwgp4g" path="res://Scene/Objects/Coins.tscn" id="8_2ynlv"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_gyuld"]
 vertices = PackedVector2Array(451, 420, 563, 258, 684, 257, 796, 257, 798, 356, 799, 426, 795, 516, 560, 517, 451, 517, 686, 520, 924, 134, 927, 678, 856, 588, 852, 423, 852, 196, 849, 355, 285, 132, 684, 199, 563, 197, 684, 586, 285, 671, 558, 587, 396, 196, 396, 353, 388, 418, 387, 587, 435, 353, 438, 260)
@@ -76,7 +79,46 @@ offset_right = 1385.0
 offset_bottom = 162.0
 text = "Getting hit depletes energy bar"
 
+[node name="TextEdit6" type="TextEdit" parent="."]
+offset_left = 882.0
+offset_top = 315.0
+offset_right = 1119.0
+offset_bottom = 373.0
+text = "Enemies are drawn to loot
+Including you!
+"
+
 [node name="Mobs" type="Node2D" parent="."]
 
 [node name="bug" parent="Mobs" instance=ExtResource("4_3nseo")]
 position = Vector2(1230, 337)
+
+[node name="Diamond" parent="." instance=ExtResource("6_qdr5w")]
+position = Vector2(908, 392)
+
+[node name="Emerald" parent="." instance=ExtResource("7_l1a2t")]
+position = Vector2(965, 632)
+
+[node name="Coins" parent="." instance=ExtResource("8_2ynlv")]
+position = Vector2(1065, 599)
+
+[node name="Coins2" parent="." instance=ExtResource("8_2ynlv")]
+position = Vector2(916, 231)
+
+[node name="Emerald2" parent="." instance=ExtResource("7_l1a2t")]
+position = Vector2(965, 288)
+
+[node name="Diamond2" parent="." instance=ExtResource("6_qdr5w")]
+position = Vector2(973, 446)
+
+[node name="Coins3" parent="." instance=ExtResource("8_2ynlv")]
+position = Vector2(922, 525)
+
+[node name="Diamond3" parent="." instance=ExtResource("6_qdr5w")]
+position = Vector2(975, 195)
+
+[node name="Emerald3" parent="." instance=ExtResource("7_l1a2t")]
+position = Vector2(881, 166)
+
+[node name="Diamond4" parent="." instance=ExtResource("6_qdr5w")]
+position = Vector2(1237, 124)
