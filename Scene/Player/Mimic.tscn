@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://yih435t43oki"]
+[gd_scene load_steps=69 format=3 uid="uid://yih435t43oki"]
 
 [ext_resource type="Script" path="res://Scene/Player/Mimic.gd" id="1_gqpi8"]
 [ext_resource type="Texture2D" uid="uid://3qmypxkx5l3h" path="res://Scene/Player/Assets/mimic spritesheet_complete.png" id="2_qtqdg"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://cs3i4j8281kcl" path="res://Scene/Player/Assets/FOOTSTEP - Metal Plate Jump Barefoot Male - 17_loop.wav" id="9_bfcvi"]
 [ext_resource type="Script" path="res://Scene/Player/Label.gd" id="9_mtgjl"]
 [ext_resource type="AudioStream" uid="uid://cbda1ulxxso1l" path="res://Scene/Player/Assets/Alien_Damage_1__calicrazed.com.wav" id="10_g1vit"]
+[ext_resource type="AudioStream" uid="uid://bq32250hnjy6m" path="res://Scene/Player/Assets/08_Bite_04.wav" id="13_ijp27"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rurfx"]
 radius = 4.16744
@@ -689,6 +690,9 @@ stream = ExtResource("10_g1vit")
 
 [node name="screechSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_bmw4c")
+
+[node name="biteSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_ijp27")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="StealthTimer" to="." method="_on_stealth_timer_timeout"]

@@ -132,6 +132,8 @@ func bite():
 		to_bite.bit()
 		hungerMeter = clamp(hungerMeter+regen,0,1)
 		biting = true
+		if !$biteSound.playing :
+			$biteSound.play()
 
 
 func process_hunger(delta:float=0.2):
