@@ -37,13 +37,12 @@ position = Vector2(-976, 260)
 texture = ExtResource("3_aggix")
 
 [node name="TextEdit2" type="TextEdit" parent="."]
-offset_left = 884.0
-offset_top = 840.0
-offset_right = 1179.0
-offset_bottom = 931.0
-text = "The Shift key  gives you a boost 
-but will paritally deplete your 
-hunger bar"
+offset_left = 940.0
+offset_top = 468.0
+offset_right = 1240.0
+offset_bottom = 536.0
+text = "The Shift key gives you a boost but 
+paritally deplete your Energy Bar"
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 visible = false
@@ -51,10 +50,10 @@ position = Vector2(257, 416)
 navigation_polygon = SubResource("NavigationPolygon_gyuld")
 
 [node name="TextEdit" type="TextEdit" parent="."]
-offset_left = 521.0
-offset_top = 366.0
-offset_right = 775.0
-offset_bottom = 432.0
+offset_left = 547.0
+offset_top = 371.0
+offset_right = 801.0
+offset_bottom = 437.0
 text = "Use the WASD keys to move 
 throught the dungeon!"
 
