@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3ss5dsavpgmr"]
+[gd_scene load_steps=10 format=3 uid="uid://oglih6ijr106"]
 
 [ext_resource type="Script" path="res://Scene/Shipping Levels/LevelLogic.gd" id="1_wi6ry"]
 [ext_resource type="PackedScene" uid="uid://mkcft8bq1n8o" path="res://Scene/Objects/tile_map.tscn" id="1_wywkr"]
@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dip1gbdq0ksgg" path="res://icon.svg" id="3_gl0ac"]
 [ext_resource type="PackedScene" uid="uid://nct0idux2fyo" path="res://Scene/bug.tscn" id="5_7e7he"]
 [ext_resource type="PackedScene" uid="uid://bgsvbqxkwgp4g" path="res://Scene/Objects/Coins.tscn" id="6_7hs4l"]
-[ext_resource type="PackedScene" uid="uid://ca3ihrw2txoki" path="res://Scene/Objects/diamond.tscn" id="7_ngsbk"]
-[ext_resource type="PackedScene" uid="uid://doao4uo13j4ag" path="res://Scene/Objects/emerald.tscn" id="8_aommo"]
+[ext_resource type="PackedScene" path="res://Scene/Objects/diamond.tscn" id="7_ngsbk"]
+[ext_resource type="PackedScene" path="res://Scene/Objects/emerald.tscn" id="8_aommo"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ca4br"]
 vertices = PackedVector2Array(995, 626, 991, 949, 864, 753, 863, 110, 571, 240, 415, 749, 417, 115, 574, -77, 231, -83, 345, 114, 224, 242, 352, 751, 638, 943, 797, 751, 638, 625, 800, 111, -2, -85, 164, -89, 157, 241, -4, 397, 208, 399, 210, 459, 1219, 457, 1222, 947, 1056, 941, 1052, 627, 1009, 457, 1014, 400, 994, 237, 131, 622, 137, 952, -7, 951, -6, 458, 192, 622, 188, 948, 580, 948, 578, 623, 636, 246, 643, -81, 989, -82, 1052, 236, 1222, 402, 1217, -83, 1057, -81)
