@@ -100,7 +100,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Hero" type="CharacterBody2D"]
+[node name="Hero" type="CharacterBody2D" groups=["hero"]]
 y_sort_enabled = true
 position = Vector2(2.08165e-12, 2.08165e-12)
 motion_mode = 1

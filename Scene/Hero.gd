@@ -154,6 +154,11 @@ func _physics_process(delta):
 
 
 func calc_velocity():
+
+	if not $TakingDamageTimer.is_stopped():
+		velocity = Vector2.ZERO
+		return
+
 	var next_pos: Vector2 = nav_agent.get_next_path_position()
 	velocity = (next_pos - position).normalized() * speed
 
@@ -186,6 +191,10 @@ func bit():
 
 	if will_push:
 		do_push()
+
+func is_biteable():
+	return target_still_hidden or not $TakingDamageTimer.is_stopped()
+
 
 
 func do_damage():
