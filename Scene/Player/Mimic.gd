@@ -39,7 +39,7 @@ func _process(delta):
 	$Sprite2D.modulate = Color.DIM_GRAY if is_hidden else Color.WHITE
 	process_hunger(depletion_speed/10*delta)
 	if animationState.get_current_node() != "Hit" :
-		if !( biting_check() ) :
+		if !biting_check() :
 			process_qte()
 		else :
 			abort_qte()
@@ -81,7 +81,7 @@ func _physics_process(delta):
 		particles.emitting = false
 
 	if input_vector != Vector2.ZERO:
-		velocity = input_vector * SPEED
+		velocity = velocity.move_toward(input_vector * SPEED,SPEED)
 		$Sprite2D.flip_h = input_vector.x < 0
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
@@ -106,6 +106,10 @@ func biting_check()->bool:
 			return true
 	
 	return false
+
+
+func push(vector:Vector2):
+	velocity = vector
 
 
 func bite():
@@ -142,11 +146,11 @@ func process_qte():
 		elif  Input.is_action_just_pressed("qte") and \
 			qteTimer.time_left <= qteTimer.wait_time:
 			is_hidden = false
-			animationState.travel("FailQTE")
 			qte["success"] = false
 			qte["done"] = true
 			PlayerSFX.seek(0)
 			$FailSound.play()
+			animationState.travel("FailQTE")
 			#play_sound("res://Scene/Player/Assets/FailSound.tres")
 	
 	if is_hidden and delayTimer.is_stopped() and qteTimer.is_stopped():
@@ -188,6 +192,7 @@ func _on_qte_timer_timeout():
 	valSlider.visible = false
 	if !qte["success"] :
 		$FailSound.play()
+		animationState.travel("FailQTE")
 		#play_sound("res://Scene/Player/Assets/FailSound.tres")
 	is_hidden = qte["success"]
 	qte["success"] = false
@@ -195,11 +200,11 @@ func _on_qte_timer_timeout():
 	delayTimer.start()
 
 
-func _on_spawn_timer_timeout():
-	pass # Replace with function body.
-
-
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name.contains("Bite") :
 		biting = false
+	pass # Replace with function body.
+
+
+func _on_push_timer_timeout():
 	pass # Replace with function body.
