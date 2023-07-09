@@ -83,16 +83,13 @@ func _physics_process(delta):
 
 func on_hit(dmg:float=0.2):
 	hungerMeter = clamp(hungerMeter-dmg,0,1)
-	#animationState.travel("Hit")
-	pass
+	animationState.travel("Hit")
 
 
 func biting_check()->bool:
 	for node in $EatArea.get_overlapping_bodies():
-		if get_tree().get_nodes_in_group("hero").has(node) and node.is_biteable():
-			node.bit()
+		if node.is_in_group("hero") and node.is_biteable():
 			to_bite = node
-			print(true)
 			return true
 	to_bite = null
 	return false
@@ -101,13 +98,11 @@ func biting_check()->bool:
 func bite():
 	animationState.travel("Bite")
 	to_bite.bit()
-	
 
 
 func process_hunger(delta:float=0.2):
 	hungerMeter = clamp(hungerMeter-delta,0,1)
 	HungerBar.value = remap(hungerMeter,0,1,30,100)
-	pass
 
 
 func process_qte():
@@ -150,7 +145,6 @@ func process_qte():
 
 func _on_stealth_timer_timeout():
 	is_hidden = true
-	
 
 
 func _on_delay_timer_timeout():
