@@ -26,7 +26,6 @@ stream = ExtResource("4_t7r4b")
 stream = ExtResource("5_qfp10")
 
 [node name="Menu" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
@@ -57,17 +56,16 @@ stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 offset_left = -150.0
-offset_top = -116.5
+offset_top = -233.0
 offset_right = 150.0
-offset_bottom = 116.5
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme = ExtResource("5_ob5wx")
 
 [node name="Start" type="Button" parent="Menu/VBoxContainer"]
@@ -97,6 +95,22 @@ layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NextLevel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -284.0
+offset_top = -277.0
+offset_right = 316.0
+offset_bottom = -177.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 64
+text = "Dungeon Cleared"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NextLevel"]
 layout_mode = 1
@@ -142,6 +156,22 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
+[node name="RichTextLabel" type="RichTextLabel" parent="RestartLevel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -238.0
+offset_top = -277.0
+offset_right = 362.0
+offset_bottom = -177.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 64
+text = "Dungeon Failed"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="RestartLevel"]
 layout_mode = 1
 anchors_preset = 8
@@ -174,6 +204,7 @@ theme_override_font_sizes/font_size = 32
 text = "Quit"
 
 [node name="Credits" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
