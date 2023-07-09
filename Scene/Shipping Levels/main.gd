@@ -51,6 +51,7 @@ func process_state_change(new_state):
 	$NextLevel.hide()
 	$RestartLevel.hide()
 	$Finish.hide()
+	$Credits.hide()
 
 	if state == "win" and curr_level.name == "Game Level 3":
 		state = "finish"
@@ -58,6 +59,8 @@ func process_state_change(new_state):
 	if state == "menu":
 		$Music/IntroMusic.play()
 		$Menu.show()
+	elif state == "credits":
+		$Credits.show()
 	elif state == "game":
 		$Music/GameplayMusic.play()
 	elif state == "win":
@@ -121,3 +124,11 @@ func _on_restart_pressed():
 	$RestartLevel.hide()
 	process_state_change("game")
 	restart_level()
+
+
+func _on_back_pressed():
+	process_state_change("menu")
+
+
+func _on_credits_pressed():
+	process_state_change("credits")
