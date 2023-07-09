@@ -137,10 +137,8 @@ func process_hunger(delta:float=0.2):
 
 
 func process_qte():
-	if !qte["done"] and !qteTimer.is_stopped():
-		if (qte["wantedTime"] > qteTimer.time_left-qte_range and qte["wantedTime"] < qteTimer.time_left+qte_range) and \
-			Input.is_action_just_pressed("qte"):
-			print("success")
+	if !qte["done"] and !qteTimer.is_stopped() and Input.is_action_just_pressed("qte"):
+		if (qte["wantedTime"] > qteTimer.time_left-qte_range and qte["wantedTime"] < qteTimer.time_left+qte_range) :
 			qteSlider.visible = false
 			valSlider.visible = false
 			prompt.visible = false
@@ -151,8 +149,7 @@ func process_qte():
 			else:
 				$SuccessSound.stop()
 				$SuccessSound.play()
-		elif  Input.is_action_just_pressed("qte"):
-			print("fail")
+		else :
 			is_hidden = false
 			qteSlider.visible = false
 			valSlider.visible = false
@@ -179,6 +176,7 @@ func abort_qte():
 	qteSlider.visible = false
 	valSlider.visible = false
 	prompt.visible = false
+	qte["done"] = false
 	qteTimer.stop()
 	delayTimer.stop()
 
