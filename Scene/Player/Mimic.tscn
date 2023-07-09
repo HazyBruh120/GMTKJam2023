@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://ce0ljar2p0q1p" path="res://Scene/Player/Assets/SuccessSound.tres" id="6_1cvxp"]
 [ext_resource type="Theme" uid="uid://crqohgh136tp8" path="res://Assets/UI/theme/kenneyUI.tres" id="6_2dfp8"]
 [ext_resource type="AudioStream" uid="uid://h8pd1tybisv6" path="res://Scene/Player/Assets/FailSound.tres" id="7_nwisi"]
-[ext_resource type="AudioStream" uid="uid://dhpd2epi8wtuh" path="res://Scene/Player/Assets/FOOTSTEP - Metal Plate Jump Barefoot Male - 17.wav" id="9_bf4a6"]
+[ext_resource type="AudioStream" uid="uid://cs3i4j8281kcl" path="res://Scene/Player/Assets/FOOTSTEP - Metal Plate Jump Barefoot Male - 17_loop.wav" id="9_bfcvi"]
 [ext_resource type="AudioStream" uid="uid://cbda1ulxxso1l" path="res://Scene/Player/Assets/Alien_Damage_1__calicrazed.com.wav" id="10_g1vit"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg6ip"]
@@ -584,7 +584,8 @@ stream = ExtResource("7_nwisi")
 volume_db = -1.0
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_bf4a6")
+stream = ExtResource("9_bfcvi")
+volume_db = 2.0
 bus = &"SFX"
 
 [node name="dmgSound" type="AudioStreamPlayer" parent="."]

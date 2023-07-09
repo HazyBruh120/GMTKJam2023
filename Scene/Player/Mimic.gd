@@ -53,7 +53,8 @@ func _process(delta):
 			animationTree.set("parameters/FailQTE/blend_position",input_vector)
 			particles.gravity = particles.gravity.rotated(particles.gravity.angle_to(-input_vector))
 			is_hidden = false
-			$JumpSound.play()
+			if !$JumpSound.playing :
+				$JumpSound.play()
 			if animationState.get_current_node() != "Move" :
 				animationState.travel("Move")
 		elif animationState.get_current_node() != "Idle" :
@@ -93,7 +94,8 @@ func _physics_process(delta):
 func on_hit(dmg:float=0.2):
 	hungerMeter = clamp(hungerMeter-dmg,0,1) if !biting else clamp(hungerMeter-dmg,0,1)
 	animationState.travel("Hit")
-	$dmgSound.play()
+	if !$FailSound.playing :
+		$dmgSound.play()
 
 
 func biting_check()->bool:
@@ -135,25 +137,34 @@ func process_hunger(delta:float=0.2):
 
 
 func process_qte():
-	if !qte["done"]:
+	if !qte["done"] and !qteTimer.is_stopped():
 		if (qte["wantedTime"] > qteTimer.time_left-qte_range and qte["wantedTime"] < qteTimer.time_left+qte_range) and \
-			Input.is_action_just_pressed("qte") and \
-			qteTimer.time_left <= qteTimer.wait_time:
+			Input.is_action_just_pressed("qte"):
+			print("success")
 			qteSlider.visible = false
 			valSlider.visible = false
 			prompt.visible = false
 			qte["success"] = true
 			qte["done"] = true
-			$SuccessSound.play()
-			#play_sound("res://Scene/Player/Assets/SuccessSound.tres")
-		elif  Input.is_action_just_pressed("qte") and \
-			qteTimer.time_left <= qteTimer.wait_time:
+			if !$SuccessSound.playing :
+				$SuccessSound.play()
+			else:
+				$SuccessSound.stop()
+				$SuccessSound.play()
+		elif  Input.is_action_just_pressed("qte"):
+			print("fail")
 			is_hidden = false
+			qteSlider.visible = false
+			valSlider.visible = false
+			prompt.visible = false
 			qte["success"] = false
 			qte["done"] = true
-			$FailSound.play()
+			if !$FailSound.playing :
+				$FailSound.play()
+			else:
+				$FailSound.stop()
+				$FailSound.play()
 			animationState.travel("FailQTE")
-			#play_sound("res://Scene/Player/Assets/FailSound.tres")
 	
 	if is_hidden and delayTimer.is_stopped() and qteTimer.is_stopped():
 		delayTimer.start()
@@ -187,9 +198,12 @@ func _on_qte_timer_timeout():
 	qteSlider.visible = false
 	valSlider.visible = false
 	if !qte["success"] :
-		$FailSound.play()
+		if !$FailSound.playing :
+			$FailSound.play()
+		else:
+			$FailSound.stop()
+			$FailSound.play()
 		animationState.travel("FailQTE")
-		#play_sound("res://Scene/Player/Assets/FailSound.tres")
 	is_hidden = qte["success"]
 	qte["success"] = false
 	qte["done"] = false
