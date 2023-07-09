@@ -21,7 +21,6 @@ const SPEED = 150.0
 @onready var qteTimer = $qteTimer
 @onready var delayTimer = $delayTimer
 
-var boostMeter:float = 1
 var hungerMeter:float = 1
 var is_hidden:bool = false
 var to_bite = null
@@ -35,6 +34,7 @@ var qte = {
 
 func _ready():
 	depletion_speed /= 10
+	regen /= 10
 	animationTree.active = true
 	qte["wantedTime"] = randf_range(0.1,0.9)
 
@@ -70,18 +70,10 @@ func _process(delta):
 func _physics_process(delta):
 	var input_vector = Input.get_vector("game_left", "game_right","game_up", "game_down")
 	if Input.is_action_pressed("boost") and input_vector != Vector2.ZERO:
-		if boostMeter > 0.0 :
-			process_hunger(depletion_speed*boost_rate*delta)
-			input_vector *= 1.5
-			boostMeter -= delta
-			particles.emitting = true
-		else :
-			particles.emitting = false
-	elif boostMeter < 1 :
-		boostMeter += delta
-		particles.emitting = false
+		process_hunger(depletion_speed*boost_rate*delta)
+		input_vector *= 1.5
+		particles.emitting = true
 	else:
-		boostMeter = 1
 		particles.emitting = false
 
 	if input_vector != Vector2.ZERO:
@@ -116,8 +108,7 @@ func biting_check()->bool:
 
 
 func push(vector:Vector2):
-	velocity = vector
-	print(vector)
+	velocity = vector*SPEED*8
 
 
 func bite():
@@ -125,7 +116,7 @@ func bite():
 	munchText.visible = true
 	#animationState.get_current_node() != "Bite" and \
 	if  \
-		Input.is_action_pressed("qte") and \
+		Input.is_action_just_pressed("qte") and \
 		to_bite != null:
 		if animationState.get_current_node() != "Bite" :
 			animationState.travel("Bite")

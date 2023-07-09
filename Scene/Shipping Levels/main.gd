@@ -85,7 +85,7 @@ func handle_win(state):
 
 func unload_level():
 	last_level_name = curr_level.name
-	remove_child(curr_level)
+	call_deferred("remove_child",curr_level)
 	curr_level.queue_free()
 
 
