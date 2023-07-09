@@ -80,5 +80,97 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Quit"
 
+[node name="NextLevel" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="ColorRect" type="ColorRect" parent="NextLevel"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NextLevel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -116.5
+offset_right = 150.0
+offset_bottom = 116.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_ob5wx")
+
+[node name="Next" type="Button" parent="NextLevel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Next Level
+"
+
+[node name="ColorRect" type="ColorRect" parent="NextLevel/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Quit" type="Button" parent="NextLevel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+
+[node name="RestartLevel" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="ColorRect" type="ColorRect" parent="RestartLevel"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RestartLevel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -116.5
+offset_right = 150.0
+offset_bottom = 116.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_ob5wx")
+
+[node name="Restart" type="Button" parent="RestartLevel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Redo Level
+"
+
+[node name="ColorRect" type="ColorRect" parent="RestartLevel/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Quit" type="Button" parent="RestartLevel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+
 [connection signal="pressed" from="Menu/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="NextLevel/VBoxContainer/Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="NextLevel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="RestartLevel/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="RestartLevel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
