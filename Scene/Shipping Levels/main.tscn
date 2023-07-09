@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://wljqgv8wa40f"]
+
+[ext_resource type="Script" path="res://Scene/Shipping Levels/main.gd" id="1_2k4rt"]
+[ext_resource type="AudioStream" uid="uid://chprwx1bpe3qc" path="res://Assets/Music/horror-story-woods.wav" id="2_874r1"]
+[ext_resource type="AudioStream" uid="uid://bru5x6vtrpweb" path="res://Assets/Music/Goblins_Den_(Regular).wav" id="3_fae2a"]
+[ext_resource type="AudioStream" uid="uid://dqi0g02ugogdj" path="res://Assets/Music/winter-hip-hop-loop.wav" id="4_t7r4b"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_2k4rt")
+
+[node name="Music" type="Node" parent="."]
+
+[node name="IntroMusic" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource("2_874r1")
+
+[node name="GameplayMusic" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource("3_fae2a")
+
+[node name="WinMusic" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource("4_t7r4b")
