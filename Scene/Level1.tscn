@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://3yi76hfssewg"]
 
 [ext_resource type="Texture2D" uid="uid://bb8stdhnra35n" path="res://Assets/Art/dungeon_tiles.png" id="1_teff4"]
-[ext_resource type="PackedScene" uid="uid://duaulf744u833" path="res://Scene/Hero.tscn" id="2_jpa6v"]
 [ext_resource type="PackedScene" uid="uid://yih435t43oki" path="res://Scene/Player/Mimic.tscn" id="3_s2l6s"]
 [ext_resource type="PackedScene" uid="uid://bgsvbqxkwgp4g" path="res://Scene/Objects/Coins.tscn" id="3_w4ubk"]
+[ext_resource type="PackedScene" uid="uid://duokf55usg8m8" path="res://Scene/knight.tscn" id="3_w5auj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kydjn"]
 texture = ExtResource("1_teff4")
@@ -824,9 +824,6 @@ layer_0/tile_data = PackedInt32Array(-1638431, 262144, 4, -1572895, 262144, 4, -
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_d1rt4")
 
-[node name="Hero" parent="." instance=ExtResource("2_jpa6v")]
-position = Vector2(-1, -10)
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(19, -35)
 enabled = false
@@ -834,6 +831,8 @@ zoom = Vector2(2, 2)
 
 [node name="Mimic" parent="." instance=ExtResource("3_s2l6s")]
 position = Vector2(144, 18)
+
+[node name="Knight" parent="." instance=ExtResource("3_w5auj")]
 
 [node name="LootFolder" type="Node2D" parent="."]
 
