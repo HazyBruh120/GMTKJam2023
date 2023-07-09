@@ -206,7 +206,6 @@ shape = SubResource("CircleShape2D_tm0an")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 5.0
-debug_enabled = true
 
 [node name="InteractArea" type="Area2D" parent="."]
 collision_layer = 0
